@@ -4,21 +4,27 @@
     [formGroup]="formulario"
     (ngSubmit)="createQuestion()">
     <div class="form">
-      
-      <div class="carousel" *ngIf="images && images.length > 0">
-        <button type="button" class="carousel__button" (click)="prevSlide()"><i class="bi bi-caret-left-fill"></i></button>
-        <div class="slides">
-          <div *ngFor="let image of images; let i = index" class="slide" >
-            <img [ngClass]="{'slide__image': i == slideIndex, 'slide__image--hidden': i != slideIndex}" [src]="image" alt="Imagem {{ i + 1 }} de {{ images.length }}" />
+
+      @if (images && images.length > 0) {
+        <div class="carousel">
+          <button type="button" class="carousel__button" (click)="prevSlide()"><i class="bi bi-caret-left-fill"></i></button>
+          <div class="slides">
+            @for (image of images; track image; let i = $index) {
+              <div class="slide" >
+                <img [ngClass]="{'slide__image': i == slideIndex, 'slide__image--hidden': i != slideIndex}" [src]="image" alt="Imagem {{ i + 1 }} de {{ images.length }}" />
+              </div>
+            }
           </div>
+          <button type="button" class="carousel__button" (click)="nextSlide()"><i class="bi bi-caret-right-fill"></i></button>
         </div>
-        <button type="button" class="carousel__button" (click)="nextSlide()"><i class="bi bi-caret-right-fill"></i></button>
-      </div>
-      
+      }
+
       <div class="indicators">
-        <span class="indicator" *ngFor="let image of images; let i = index" [class.active]="i === slideIndex" (click)="goToSlide(i)"></span>
+        @for (image of images; track image; let i = $index) {
+          <span class="indicator" [class.active]="i === slideIndex" (click)="goToSlide(i)"></span>
+        }
       </div>
-      
+
       <div class="form__file">
         <input type="file" formControlName="file" multiple accept="image/jpeg" (change)="handleFile($event)"  />
       </div>
@@ -30,24 +36,27 @@
           <i class="bi bi-fonts me-1"></i>Enunciado
         </label>
         <textarea required
-        class="form-group__input"
+          class="form-group__input"
           type="text"
           formControlName="statement"
           placeholder="Digite o enunciado da questão"
           [ngClass]="campoValidado('statement')"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Nome obrigatório"
-        ></app-message>
+        ></textarea>
+        @if (!validado) {
+          <app-message
+            mensagem="Nome obrigatório"
+          ></app-message>
+        }
       </div>
       <div class="form__select">
         <mat-form-field>
           <mat-label>Dificuldade</mat-label>
           <mat-select formControlName="pointsEnum">
-            <mat-option *ngFor="let point of points" [value]="point">
-              {{point}}
-            </mat-option>
+            @for (point of points; track point) {
+              <mat-option [value]="point">
+                {{point}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>
@@ -56,9 +65,11 @@
         <mat-form-field style="width: 81%;">
           <mat-label>Matéria</mat-label>
           <mat-select formControlName="course">
-            <mat-option *ngFor="let course of courses" [value]="course.id">
-              {{course.name}}
-            </mat-option>
+            @for (course of courses; track course) {
+              <mat-option [value]="course.id">
+                {{course.name}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>
@@ -87,11 +98,12 @@
           class="form-group__input"
           formControlName="alternativeA"
           placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
+        ></textarea>
+        @if (!validado) {
+          <app-message
+            mensagem="Campo obrigatório"
+          ></app-message>
+        }
       </div>
 
       <div class="form-group">
@@ -111,11 +123,12 @@
           class="form-group__input"
           formControlName="alternativeB"
           placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
+        ></textarea>
+        @if (!validado) {
+          <app-message
+            mensagem="Campo obrigatório"
+          ></app-message>
+        }
       </div>
 
       <div class="form-group">
@@ -135,11 +148,12 @@
           class="form-group__input"
           formControlName="alternativeC"
           placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
+        ></textarea>
+        @if (!validado) {
+          <app-message
+            mensagem="Campo obrigatório"
+          ></app-message>
+        }
       </div>
 
       <div class="form-group">
@@ -159,11 +173,12 @@
           class="form-group__input"
           formControlName="alternativeD"
           placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
+        ></textarea>
+        @if (!validado) {
+          <app-message
+            mensagem="Campo obrigatório"
+          ></app-message>
+        }
       </div>
 
       <div class="form-group">
@@ -183,11 +198,12 @@
           class="form-group__input"
           formControlName="alternativeE"
           placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
+        ></textarea>
+        @if (!validado) {
+          <app-message
+            mensagem="Campo obrigatório"
+          ></app-message>
+        }
       </div>
     </mat-radio-group>
 
@@ -195,14 +211,14 @@
       <button
         (click)="cancelar()"
         class="form-button-cancelar me-5">
-          Cancelar
+        Cancelar
       </button>
 
       <button
-      id="botao-salvar"
-      type="submit"
-      [ngClass]="habilitarBotao()"
-      [disabled]="!formulario.valid">
+        id="botao-salvar"
+        type="submit"
+        [ngClass]="habilitarBotao()"
+        [disabled]="!formulario.valid">
         Salvar
       </button>
     </div>

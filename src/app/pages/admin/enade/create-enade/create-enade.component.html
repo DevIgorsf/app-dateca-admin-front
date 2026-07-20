@@ -5,41 +5,48 @@
     (ngSubmit)="createEnadeWithImage()">
     <div class="form">
 
-      <div class="carousel" *ngIf="images && images.length > 0">
+      @if (images && images.length > 0) {
+        <div class="carousel">
           <button type="button" class="carousel__button" (click)="prevSlide()"><i class="bi bi-caret-left-fill"></i></button>
           <div class="slides">
-            <div *ngFor="let image of images; let i = index" class="slide" >
-              <img [ngClass]="{'slide__image': i == slideIndex, 'slide__image--hidden': i != slideIndex}" [src]="image" alt="Imagem {{ i + 1 }} de {{ images.length }}" />
-            </div>
+            @for (image of images; track image; let i = $index) {
+              <div class="slide" >
+                <img [ngClass]="{'slide__image': i == slideIndex, 'slide__image--hidden': i != slideIndex}" [src]="image" alt="Imagem {{ i + 1 }} de {{ images.length }}" />
+              </div>
+            }
           </div>
           <button type="button" class="carousel__button" (click)="nextSlide()"><i class="bi bi-caret-right-fill"></i></button>
         </div>
-        
-        <div class="indicators">
-          <span class="indicator" *ngFor="let image of images; let i = index" [class.active]="i === slideIndex" (click)="goToSlide(i)"></span>
-        </div>
-        
-        <div class="form__file">
-          <input type="file" multiple accept="image/jpeg" (change)="handleFile($event)"  />
-        </div>
+      }
 
-        <div class="form__title">
-          <label
-            class="mb-1 ms-2"
-            for="year">
-            <i class="bi bi-fonts me-1"></i>Ano
-          </label>
-          <input required
+      <div class="indicators">
+        @for (image of images; track image; let i = $index) {
+          <span class="indicator" [class.active]="i === slideIndex" (click)="goToSlide(i)"></span>
+        }
+      </div>
+
+      <div class="form__file">
+        <input type="file" multiple accept="image/jpeg" (change)="handleFile($event)"  />
+      </div>
+
+      <div class="form__title">
+        <label
+          class="mb-1 ms-2"
+          for="year">
+          <i class="bi bi-fonts me-1"></i>Ano
+        </label>
+        <input required
           class="form-group__input"
-            type="number"
-            formControlName="year"
-            placeholder="Digite o ano da prova do enade"
-            [ngClass]="campoValidado('year')"
-            >
-          <app-message
-            *ngIf="!validado"
-            mensagem="Nome obrigatório"
-          ></app-message>
+          type="number"
+          formControlName="year"
+          placeholder="Digite o ano da prova do enade"
+          [ngClass]="campoValidado('year')"
+          >
+          @if (!validado) {
+            <app-message
+              mensagem="Nome obrigatório"
+            ></app-message>
+          }
         </div>
 
         <div class="form__title">
@@ -49,193 +56,202 @@
             <i class="bi bi-fonts me-1"></i>Número
           </label>
           <input required
-          class="form-group__input"
+            class="form-group__input"
             type="number"
             formControlName="number"
             placeholder="Digite o número da questão"
             [ngClass]="campoValidado('number')"
             >
-          <app-message
-            *ngIf="!validado"
-            mensagem="Nome obrigatório"
-          ></app-message>
-        </div>
+            @if (!validado) {
+              <app-message
+                mensagem="Nome obrigatório"
+              ></app-message>
+            }
+          </div>
 
-        <div class="form__select">
-          <mat-form-field>
-            <mat-label>Dificuldade</mat-label>
-            <mat-select formControlName="pointsEnum">
-              <mat-option *ngFor="let point of points" [value]="point">
-                {{point}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-  
-        <div class="form__statement">
-          <label
-            class="mb-1 ms-2"
-            for="statement">
-            <i class="bi bi-fonts me-1"></i>Enunciado
-          </label>
-          <textarea required
-          class="form-group__textarea"
-            type="text"
-            formControlName="statement"
-            placeholder="Digite o enunciado da questão"
-            [ngClass]="campoValidado('statement')"
+          <div class="form__select">
+            <mat-form-field>
+              <mat-label>Dificuldade</mat-label>
+              <mat-select formControlName="pointsEnum">
+                @for (point of points; track point) {
+                  <mat-option [value]="point">
+                    {{point}}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="form__statement">
+            <label
+              class="mb-1 ms-2"
+              for="statement">
+              <i class="bi bi-fonts me-1"></i>Enunciado
+            </label>
+            <textarea required
+              class="form-group__textarea"
+              type="text"
+              formControlName="statement"
+              placeholder="Digite o enunciado da questão"
+              [ngClass]="campoValidado('statement')"
             ></textarea>
-          <app-message
-            *ngIf="!validado"
-            mensagem="Nome obrigatório"
-          ></app-message>
+            @if (!validado) {
+              <app-message
+                mensagem="Nome obrigatório"
+              ></app-message>
+            }
+          </div>
         </div>
-      </div>
 
-    <h4>
-      Digite as alternativas:
-    </h4>
+        <h4>
+          Digite as alternativas:
+        </h4>
 
 
-    <mat-radio-group aria-label="Select an option" formControlName="correctAnswer">
-      <div class="form-group">
-        <mat-radio-button
-          class="form-group__radio"
-          value="A">
-        </mat-radio-button>
-        <label
-          class="form-group__label"
-          for="alternativeA">
-          A
-        </label>
+        <mat-radio-group aria-label="Select an option" formControlName="correctAnswer">
+          <div class="form-group">
+            <mat-radio-button
+              class="form-group__radio"
+              value="A">
+            </mat-radio-button>
+            <label
+              class="form-group__label"
+              for="alternativeA">
+              A
+            </label>
 
-        <textarea required
-          id="alternativeA"
-          type="text"
-          class="form-group__textarea"
-          formControlName="alternativeA"
-          placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
-      </div>
+            <textarea required
+              id="alternativeA"
+              type="text"
+              class="form-group__textarea"
+              formControlName="alternativeA"
+              placeholder="Digite a opção"
+            ></textarea>
+            @if (!validado) {
+              <app-message
+                mensagem="Campo obrigatório"
+              ></app-message>
+            }
+          </div>
 
-      <div class="form-group">
-        <mat-radio-button
-          class="form-group__radio"
-          value="B">
-        </mat-radio-button>
-        <label
-          class="form-group__label"
-          for="alternativeB">
-          B
-        </label>
+          <div class="form-group">
+            <mat-radio-button
+              class="form-group__radio"
+              value="B">
+            </mat-radio-button>
+            <label
+              class="form-group__label"
+              for="alternativeB">
+              B
+            </label>
 
-        <textarea required
-          id="alternativeB"
-          type="text"
-          class="form-group__textarea"
-          formControlName="alternativeB"
-          placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
-      </div>
+            <textarea required
+              id="alternativeB"
+              type="text"
+              class="form-group__textarea"
+              formControlName="alternativeB"
+              placeholder="Digite a opção"
+            ></textarea>
+            @if (!validado) {
+              <app-message
+                mensagem="Campo obrigatório"
+              ></app-message>
+            }
+          </div>
 
-      <div class="form-group">
-        <mat-radio-button
-          class="form-group__radio"
-          value="C">
-        </mat-radio-button>
-        <label
-          class="form-group__label"
-          for="alternativeC">
-          C
-        </label>
+          <div class="form-group">
+            <mat-radio-button
+              class="form-group__radio"
+              value="C">
+            </mat-radio-button>
+            <label
+              class="form-group__label"
+              for="alternativeC">
+              C
+            </label>
 
-        <textarea required
-          id="alternativeC"
-          type="text"
-          class="form-group__textarea"
-          formControlName="alternativeC"
-          placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
-      </div>
+            <textarea required
+              id="alternativeC"
+              type="text"
+              class="form-group__textarea"
+              formControlName="alternativeC"
+              placeholder="Digite a opção"
+            ></textarea>
+            @if (!validado) {
+              <app-message
+                mensagem="Campo obrigatório"
+              ></app-message>
+            }
+          </div>
 
-      <div class="form-group">
-        <mat-radio-button
-          class="form-group__radio"
-          value="D">
-        </mat-radio-button>
-        <label
-          class="form-group__label"
-          for="alternativeD">
-          D
-        </label>
+          <div class="form-group">
+            <mat-radio-button
+              class="form-group__radio"
+              value="D">
+            </mat-radio-button>
+            <label
+              class="form-group__label"
+              for="alternativeD">
+              D
+            </label>
 
-        <textarea required
-          id="alternativeD"
-          type="text"
-          class="form-group__textarea"
-          formControlName="alternativeD"
-          placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
-      </div>
+            <textarea required
+              id="alternativeD"
+              type="text"
+              class="form-group__textarea"
+              formControlName="alternativeD"
+              placeholder="Digite a opção"
+            ></textarea>
+            @if (!validado) {
+              <app-message
+                mensagem="Campo obrigatório"
+              ></app-message>
+            }
+          </div>
 
-      <div class="form-group">
-        <mat-radio-button
-          class="form-group__radio"
-          value="E">
-        </mat-radio-button>
-        <label
-          class="form-group__label"
-          for="text">
-          E
-        </label>
+          <div class="form-group">
+            <mat-radio-button
+              class="form-group__radio"
+              value="E">
+            </mat-radio-button>
+            <label
+              class="form-group__label"
+              for="text">
+              E
+            </label>
 
-        <textarea required
-          id="alternativeE"
-          type="text"
-          class="form-group__textarea"
-          formControlName="alternativeE"
-          placeholder="Digite a opção"
-          ></textarea>
-        <app-message
-          *ngIf="!validado"
-          mensagem="Campo obrigatório"
-        ></app-message>
-      </div>
-    </mat-radio-group>
+            <textarea required
+              id="alternativeE"
+              type="text"
+              class="form-group__textarea"
+              formControlName="alternativeE"
+              placeholder="Digite a opção"
+            ></textarea>
+            @if (!validado) {
+              <app-message
+                mensagem="Campo obrigatório"
+              ></app-message>
+            }
+          </div>
+        </mat-radio-group>
 
-    <div class="d-flex justify-content-end m-5 pb-5">
-      <button
-        (click)="cancelar()"
-        class="form-button-cancelar me-5">
-          Cancelar
-      </button>
+        <div class="d-flex justify-content-end m-5 pb-5">
+          <button
+            (click)="cancelar()"
+            class="form-button-cancelar me-5">
+            Cancelar
+          </button>
 
-      <button
-      id="botao-salvar"
-      type="submit"
-      class="me-5"
-      [ngClass]="habilitarBotao()"
-      [disabled]="!formulario.valid">
-        Salvar
-      </button>
+          <button
+            id="botao-salvar"
+            type="submit"
+            class="me-5"
+            [ngClass]="habilitarBotao()"
+            [disabled]="!formulario.valid">
+            Salvar
+          </button>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
 
 

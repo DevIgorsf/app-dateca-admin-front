@@ -5,36 +5,38 @@
   <div class="navbar__toggle">
     <mat-slide-toggle
       class="navbar__toggle-input"
-      [checked]="isDarkMode" 
+      [checked]="isDarkMode"
       (change)="onSlideToggleChange($event)">
       Dark mode
     </mat-slide-toggle>
     <nav class="navbar__navegacao">
-      <div class="dropdown" *ngIf="user$ | async as user">
-        <div class="dropdown-toggle navbar__navegacao-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-person-circle"></i>
-          <p >{{getFirstName(professor?.name)}}</p>
+      @if (user$ | async; as user) {
+        <div class="dropdown">
+          <div class="dropdown-toggle navbar__navegacao-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle"></i>
+            <p >{{getFirstName(professor?.name)}}</p>
+          </div>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li class="navbar-list__item">
+              <a class="dropdown-item" routerLink="/admin/perfil">
+                <span class="navbar-list__icon">
+                  <i class="bi bi-person"></i>
+                </span>
+                <span class="ms-2">Perfil</span>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="navbar-list__item">
+              <a class="dropdown-item text-danger" (click)="logout()">
+                <span class="navbar-list__icon">
+                  <i class="bi bi-box-arrow-right"></i>
+                </span>
+                <span class="ms-2">Logout</span>
+              </a>
+            </li>
+          </ul>
         </div>
-        <ul class="dropdown-menu dropdown-menu-dark">
-          <li class="navbar-list__item">
-            <a class="dropdown-item" routerLink="/admin/perfil">
-              <span class="navbar-list__icon">
-                <i class="bi bi-person"></i>
-              </span>
-              <span class="ms-2">Perfil</span>
-            </a>
-          </li>
-          <li><hr class="dropdown-divider"></li>
-          <li class="navbar-list__item">
-            <a class="dropdown-item text-danger" (click)="logout()">
-              <span class="navbar-list__icon">
-                <i class="bi bi-box-arrow-right"></i>
-              </span>
-              <span class="ms-2">Logout</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+      }
     </nav>
   </div>
 </header>

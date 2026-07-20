@@ -15,81 +15,85 @@
           placeholder="Digite o registro"
           [ngClass]="campoValidado('registrationNumber')"
           >
-        <app-message
-          *ngIf="!validado"
-          mensagem="Registro obrigatório"
-        ></app-message>
-      </div>
+          @if (!validado) {
+            <app-message
+              mensagem="Registro obrigatório"
+            ></app-message>
+          }
+        </div>
 
-      <div>
-        <label
-          class="mb-1 ms-2"
-          for="name">
-          <i class="bi bi-fonts me-1"></i>Nome
-        </label>
-        <input required
-          type="text"
-          formControlName="name"
-          placeholder="Digite seu nome"
-          [ngClass]="campoValidado('name')"
-          >
-        <app-message
-          *ngIf="!validado"
-          mensagem="Nome obrigatório"
-        ></app-message>
-      </div>
+        <div>
+          <label
+            class="mb-1 ms-2"
+            for="name">
+            <i class="bi bi-fonts me-1"></i>Nome
+          </label>
+          <input required
+            type="text"
+            formControlName="name"
+            placeholder="Digite seu nome"
+            [ngClass]="campoValidado('name')"
+            >
+            @if (!validado) {
+              <app-message
+                mensagem="Nome obrigatório"
+              ></app-message>
+            }
+          </div>
 
-      <div>
-        <label
-          class="mb-1 ms-2"
-          for="phone">
-          <i class="bi bi-telephone-fill me-2"></i>Telefone
-        </label>
-        <input required
-          type="text"
-          formControlName="phone"
-          placeholder="Digite seu telefone"
-          [ngClass]="campoValidado('phone')"
-          >
-        <app-message
-          *ngIf="!validado"
-          mensagem="Telefone obrigatório"
-        ></app-message>
-      </div>
+          <div>
+            <label
+              class="mb-1 ms-2"
+              for="phone">
+              <i class="bi bi-telephone-fill me-2"></i>Telefone
+            </label>
+            <input required
+              type="text"
+              formControlName="phone"
+              placeholder="Digite seu telefone"
+              [ngClass]="campoValidado('phone')"
+              >
+              @if (!validado) {
+                <app-message
+                  mensagem="Telefone obrigatório"
+                ></app-message>
+              }
+            </div>
 
-      <div>
-        <label
-          class="mb-1 ms-2"
-          for="email"><i class="bi bi-envelope-fill me-2"></i>Email </label>
-        <input required
-          type="text"
-          formControlName="email"
-          placeholder="Digite seu e-mail"
-          [ngClass]="campoValidado('email')"
-          >
-        <app-message
-          *ngIf="!validado"
-          mensagem="Email obrigatório"
-        ></app-message>
-      </div>
-    </div>
+            <div>
+              <label
+                class="mb-1 ms-2"
+                for="email"><i class="bi bi-envelope-fill me-2"></i>Email </label>
+                <input required
+                  type="text"
+                  formControlName="email"
+                  placeholder="Digite seu e-mail"
+                  [ngClass]="campoValidado('email')"
+                  >
+                  @if (!validado) {
+                    <app-message
+                      mensagem="Email obrigatório"
+                    ></app-message>
+                  }
+                </div>
+              </div>
 
-    <div class="d-flex justify-content-end m-5">
-      <button
-        (click)="cancelar()"
-        class="button-cancelar me-5">
-          Cancelar
-      </button>
+              <div class="d-flex justify-content-end m-5">
+                <button
+                  (click)="cancelar()"
+                  class="button-cancelar me-5">
+                  Cancelar
+                </button>
 
-      <button
-      id="botao-salvar"
-      (click)="updateProfessor()"
-      class="button-adicionar  me-5"
-      [ngClass]="habilitarBotao()"
-      [disabled]="!updateProfessorForm.valid">
-        Editar
-      </button>
-    </div>
-  </form>
-</div>
+                <button
+                  id="botao-salvar"
+                  (click)="updateProfessor()"
+                  class="button-adicionar  me-5"
+                  [ngClass]="habilitarBotao()"
+                  [disabled]="!updateProfessorForm.valid">
+                  Editar
+                </button>
+              </div>
+            </form>
+          </div>
 

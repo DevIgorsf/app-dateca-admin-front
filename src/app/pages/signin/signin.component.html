@@ -1,27 +1,28 @@
 <div class="login__background">
   <section class="login" >
-      <figure>
-          <img class="login__img" src="./../../../../assets/images/logo-dateca-background-white.jpg" alt="Logo da empresa e seu nome" />
-      </figure>
-      <div class="login__block"></div>
-      <form class="form mt-4" (ngSubmit)="logIn()" #loginForm="ngForm">
-        <h2 class="text-secondary">
-          Faça o seu login
-        </h2>
-        <div class="form-group">
-          <label class="login-label" for="login">Login</label>
-          <input
-            class="form-control login-input"
-            placeholder="Login do usuário"
-            [(ngModel)]="login"
-            name="login"
-            #campoUsuario="ngModel"
-            required
+    <figure>
+      <img class="login__img" src="./../../../../assets/images/logo-dateca-background-white.jpg" alt="Logo da empresa e seu nome" />
+    </figure>
+    <div class="login__block"></div>
+    <form class="form mt-4" (ngSubmit)="logIn()" #loginForm="ngForm">
+      <h2 class="text-secondary">
+        Faça o seu login
+      </h2>
+      <div class="form-group">
+        <label class="login-label" for="login">Login</label>
+        <input
+          class="form-control login-input"
+          placeholder="Login do usuário"
+          [(ngModel)]="login"
+          name="login"
+          #campoUsuario="ngModel"
+          required
           />
-          <app-message
-            *ngIf="campoUsuario.invalid && campoUsuario.touched"
-            mensagem="Usuário obrigatório"
-          ></app-message>
+          @if (campoUsuario.invalid && campoUsuario.touched) {
+            <app-message
+              mensagem="Usuário obrigatório"
+            ></app-message>
+          }
         </div>
 
         <div class="form-group">
@@ -34,22 +35,23 @@
             name="password"
             #campoSenha="ngModel"
             required
-          />
-          <app-message
-            *ngIf="campoSenha.invalid && campoSenha.touched"
-            mensagem="Senha obrigatória"
-          ></app-message>
-        </div>
+            />
+            @if (campoSenha.invalid && campoSenha.touched) {
+              <app-message
+                mensagem="Senha obrigatória"
+              ></app-message>
+            }
+          </div>
 
-        <button
-          type="submit"
-          class="btn btn-primary btn-block login-button"
-          [disabled]="loginForm.invalid"
-        >
-          Entrar
-        </button>
-      </form>
-  </section>
-</div>
+          <button
+            type="submit"
+            class="btn btn-primary btn-block login-button"
+            [disabled]="loginForm.invalid"
+            >
+            Entrar
+          </button>
+        </form>
+      </section>
+    </div>
 
 

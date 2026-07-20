@@ -1,10 +1,11 @@
 <mat-card class="col-12">
-    <mat-card-header>
-      <h2><b>Ranking Geral</b></h2>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list role="list">
-        <mat-list-item *ngFor="let student of rankingStudents; let i = index" role="listitem">
+  <mat-card-header>
+    <h2><b>Ranking Geral</b></h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list role="list">
+      @for (student of rankingStudents; track student; let i = $index) {
+        <mat-list-item role="listitem">
           <div class="dashboard__list">
             <div class="col-2">
               #{{ i + 1 }} <!-- Índice do Angular é 0-based, mas você quer começar em 1 -->
@@ -17,6 +18,7 @@
             </div>
           </div>
         </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+      }
+    </mat-list>
+  </mat-card-content>
+</mat-card>

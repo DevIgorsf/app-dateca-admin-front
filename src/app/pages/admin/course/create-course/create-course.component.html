@@ -15,91 +15,98 @@
           placeholder="Digite o registro"
           [ngClass]="campoValidado('code')"
           >
-        <app-message
-          *ngIf="!validado"
-          mensagem="Código obrigatório"
-        ></app-message>
-      </div>
+          @if (!validado) {
+            <app-message
+              mensagem="Código obrigatório"
+            ></app-message>
+          }
+        </div>
 
-      <div>
-        <label
-          class="mb-1 ms-2"
-          for="name">
-          <i class="bi bi-fonts me-1"></i>Nome
-        </label>
-        <input required
-          type="text"
-          formControlName="name"
-          placeholder="Digite seu nome"
-          [ngClass]="campoValidado('name')"
-          >
-        <app-message
-          *ngIf="!validado"
-          mensagem="Nome obrigatório"
-        ></app-message>
-      </div>
+        <div>
+          <label
+            class="mb-1 ms-2"
+            for="name">
+            <i class="bi bi-fonts me-1"></i>Nome
+          </label>
+          <input required
+            type="text"
+            formControlName="name"
+            placeholder="Digite seu nome"
+            [ngClass]="campoValidado('name')"
+            >
+            @if (!validado) {
+              <app-message
+                mensagem="Nome obrigatório"
+              ></app-message>
+            }
+          </div>
 
-      <div>
-        <label
-          class="mb-1 ms-2"
-          for="semester">
-          <i class="bi bi-journal-text me-2"></i>Semestre
-        </label>
-        <input required
-          type="text"
-          formControlName="semester"
-          placeholder="Digite o semestre"
-          [ngClass]="campoValidado('semester')"
-          >
-        <app-message
-          *ngIf="!validado"
-          mensagem="Semestre obrigatório"
-        ></app-message>
-      </div>
+          <div>
+            <label
+              class="mb-1 ms-2"
+              for="semester">
+              <i class="bi bi-journal-text me-2"></i>Semestre
+            </label>
+            <input required
+              type="text"
+              formControlName="semester"
+              placeholder="Digite o semestre"
+              [ngClass]="campoValidado('semester')"
+              >
+              @if (!validado) {
+                <app-message
+                  mensagem="Semestre obrigatório"
+                ></app-message>
+              }
+            </div>
 
-      <mat-form-field class="example-chip-list">
-        <mat-label>Professores</mat-label>
-        <mat-chip-grid #chipGrid aria-label="professor selection">
-          <mat-chip-row *ngFor="let professor of professors" (removed)="remove(professor)">
-            {{ professor.name }}
-            <button matChipRemove [attr.aria-label]="'remove ' + professor.name">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-        </mat-chip-grid>
-        <input
-          placeholder="Novo professor..."
-          #professorInput
-          [formControl]="professorCtrl"
-          [matChipInputFor]="chipGrid"
-          [matAutocomplete]="auto"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="add($event)"
-        />
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-          <mat-option *ngFor="let professor of filteredProfessors | async" [value]="professor">
-            {{ professor.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
+            <mat-form-field class="example-chip-list">
+              <mat-label>Professores</mat-label>
+              <mat-chip-grid #chipGrid aria-label="professor selection">
+                @for (professor of professors; track professor) {
+                  <mat-chip-row (removed)="remove(professor)">
+                    {{ professor.name }}
+                    <button matChipRemove [attr.aria-label]="'remove ' + professor.name">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                }
+              </mat-chip-grid>
+              <input
+                placeholder="Novo professor..."
+                #professorInput
+                [formControl]="professorCtrl"
+                [matChipInputFor]="chipGrid"
+                [matAutocomplete]="auto"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"
+                />
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  @for (professor of filteredProfessors | async; track professor) {
+                    <mat-option [value]="professor">
+                      {{ professor.name }}
+                    </mat-option>
+                  }
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
 
-    <div class="d-flex justify-content-end m-5">
-      <button
-        (click)="cancelar()"
-        class="button-cancelar me-5">
-          Cancelar
-      </button>
+            <div class="d-flex justify-content-end m-5">
+              <button
+                (click)="cancelar()"
+                class="button-cancelar me-5">
+                Cancelar
+              </button>
 
-      <button
-      id="botao-salvar"
-      (click)="createCourse()"
-      class="button-adicionar  me-5"
-      [ngClass]="habilitarBotao()"
-      [disabled]="!formulario.valid">
-        Salvar
-      </button>
-    </div>
-  </form>
-</div>
+              <button
+                id="botao-salvar"
+                (click)="createCourse()"
+                class="button-adicionar  me-5"
+                [ngClass]="habilitarBotao()"
+                [disabled]="!formulario.valid">
+                Salvar
+              </button>
+            </div>
+          </form>
+        </div>
 

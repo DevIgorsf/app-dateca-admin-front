@@ -1,110 +1,113 @@
 <div class="profile">
-    <form [formGroup]="updateProfessorForm">
-        <div class="form">
-            <div>
-                <label
-                class="mb-1 ms-2"
-                for="registrationNumber">
-                <i class="bi bi-person-vcard-fill me-2"></i>Registro
-                </label>
-                <input readonly
-                type="text"
-                formControlName="registrationNumber"
-                placeholder="Digite o registro"
-                [ngClass]="campoValidado('registrationNumber')"
-                >
-            </div>
+  <form [formGroup]="updateProfessorForm">
+    <div class="form">
+      <div>
+        <label
+          class="mb-1 ms-2"
+          for="registrationNumber">
+          <i class="bi bi-person-vcard-fill me-2"></i>Registro
+        </label>
+        <input readonly
+          type="text"
+          formControlName="registrationNumber"
+          placeholder="Digite o registro"
+          [ngClass]="campoValidado('registrationNumber')"
+          >
+      </div>
 
-            <div>
-                <label class="mb-1 ms-2"
-                    for="name">
-                    <i class="bi bi-fonts me-1"></i>Nome
-                </label>
-                <input required
-                    type="text"
-                    formControlName="name"
-                    placeholder="Digite seu nome"
-                    [ngClass]="campoValidado('name')">
-                <app-message
-                    *ngIf="!validado"
-                    mensagem="Nome obrigatório">
-                </app-message>
-            </div>
+      <div>
+        <label class="mb-1 ms-2"
+          for="name">
+          <i class="bi bi-fonts me-1"></i>Nome
+        </label>
+        <input required
+          type="text"
+          formControlName="name"
+          placeholder="Digite seu nome"
+          [ngClass]="campoValidado('name')">
+        @if (!validado) {
+          <app-message
+            mensagem="Nome obrigatório">
+          </app-message>
+        }
+      </div>
 
-            <div>
-                <label
-                    class="mb-1 ms-2"
-                    for="phone">
-                    <i class="bi bi-telephone-fill me-2"></i>Telefone
-                </label>
-                <input required
-                    type="text"
-                    formControlName="phone"
-                    placeholder="Digite seu telefone"
-                    [ngClass]="campoValidado('phone')">
-                <app-message
-                    *ngIf="!validado"
-                    mensagem="Telefone obrigatório">
-                </app-message>
-            </div>
+      <div>
+        <label
+          class="mb-1 ms-2"
+          for="phone">
+          <i class="bi bi-telephone-fill me-2"></i>Telefone
+        </label>
+        <input required
+          type="text"
+          formControlName="phone"
+          placeholder="Digite seu telefone"
+          [ngClass]="campoValidado('phone')">
+        @if (!validado) {
+          <app-message
+            mensagem="Telefone obrigatório">
+          </app-message>
+        }
+      </div>
 
-            <div>
-                <label
-                class="mb-1 ms-2"
-                for="email"><i class="bi bi-envelope-fill me-2"></i>Email </label>
-                <input required
-                type="text"
-                formControlName="email"
-                placeholder="Digite seu e-mail"
-                [ngClass]="campoValidado('email')"
-                >
-                <app-message
-                *ngIf="!validado"
-                mensagem="Email obrigatório"
-                ></app-message>
-            </div>
+      <div>
+        <label
+          class="mb-1 ms-2"
+          for="email"><i class="bi bi-envelope-fill me-2"></i>Email </label>
+          <input required
+            type="text"
+            formControlName="email"
+            placeholder="Digite seu e-mail"
+            [ngClass]="campoValidado('email')"
+            >
+          @if (!validado) {
+            <app-message
+              mensagem="Email obrigatório"
+            ></app-message>
+          }
         </div>
+      </div>
 
-        <div class="d-flex justify-content-end m-5">
-            <button
-            id="botao-salvar"
-            (click)="updateProfessor()"
-            class="button-adicionar  me-5"
-            [ngClass]="habilitarBotao()"
-            [disabled]="!updateProfessorForm.valid">
-                Editar
-            </button>
-        </div>
+      <div class="d-flex justify-content-end m-5">
+        <button
+          id="botao-salvar"
+          (click)="updateProfessor()"
+          class="button-adicionar  me-5"
+          [ngClass]="habilitarBotao()"
+          [disabled]="!updateProfessorForm.valid">
+          Editar
+        </button>
+      </div>
     </form>
 
     <form [formGroup]="newPasswordProfessorForm">
-        <div class="form">
-            <div>
-                <label for="password" class="mb-1 ms-2">Nova senha</label>
-                <input type="password"  
-                formControlName="password"
-                placeholder="Digite a nova senha" 
-                required
-                class="form-item">
-                <!-- [ngClass]="campoValidado('password')"> -->
-            </div>
-            <div>
-                <label for="password" class="mb-1 ms-2">Confirme nova senha</label>
-                <input type="password"  
-                placeholder="Confirme a nova senha" 
-                formControlName="newPassword"
-                required
-                class="form-item">
-                <!-- [ngClass]="campoValidado('newPassword')"> -->
-            </div>
-            <div></div>
-            <div class="d-flex justify-content-end mt-3 me-5">
-                <button 
-                id="botao-salvar"
-                (click)="updatePassword()"
-                class="button-adicionar botao-salvar me-5"
-                [disabled]="!updateProfessorForm.valid">Alterar senha</button>
-            </div>
+      <div class="form">
+        <div>
+          <label for="password" class="mb-1 ms-2">Nova senha</label>
+          <input type="password"
+            formControlName="password"
+            placeholder="Digite a nova senha"
+            required
+            class="form-item">
+          <!-- [ngClass]="campoValidado('password')"> -->
         </div>
+        <div>
+          <label for="password" class="mb-1 ms-2">Confirme nova senha</label>
+          <input type="password"
+            placeholder="Confirme a nova senha"
+            formControlName="newPassword"
+            required
+            class="form-item">
+          <!-- [ngClass]="campoValidado('newPassword')"> -->
+        </div>
+        <div></div>
+        <div class="d-flex justify-content-end mt-3 me-5">
+          <button
+            id="botao-salvar"
+            (click)="updatePassword()"
+            class="button-adicionar botao-salvar me-5"
+          [disabled]="!updateProfessorForm.valid">Alterar senha</button>
+        </div>
+      </div>
     </form>
-</div>
+  </div>
