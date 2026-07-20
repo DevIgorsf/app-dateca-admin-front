@@ -1,5 +1,5 @@
 import { CourseService } from 'src/app/service/course/course.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
 import { QuestionService } from 'src/app/service/question/question.service';
 import { EnadeService } from 'src/app/service/enade/enade.service';
@@ -11,6 +11,7 @@ import { QuestionResultDTO } from 'src/app/interfaces/QuestionResultaDTO';
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DashboardComponent implements OnInit {

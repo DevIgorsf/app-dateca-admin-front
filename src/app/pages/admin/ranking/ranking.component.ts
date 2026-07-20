@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
 
 
@@ -6,6 +6,7 @@ import { ProfessorService } from 'src/app/service/professor/professor.service';
     selector: 'app-ranking',
     templateUrl: './ranking.component.html',
     styleUrls: ['./ranking.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RankingComponent {

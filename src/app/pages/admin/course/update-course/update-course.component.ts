@@ -1,6 +1,6 @@
 import { Professor } from 'src/app/interfaces/professor';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, ElementRef, Inject, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription, map, startWith } from 'rxjs';
@@ -15,6 +15,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
     selector: 'app-update-course',
     templateUrl: './update-course.component.html',
     styleUrls: ['./update-course.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class UpdateCourseComponent {

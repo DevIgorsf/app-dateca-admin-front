@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription} from 'rxjs';
 import { Professor } from 'src/app/interfaces/professor';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
@@ -11,6 +11,7 @@ import { MatSort, Sort } from '@angular/material/sort';
     selector: 'app-professors',
     templateUrl: './professors.component.html',
     styleUrls: ['./professors.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ProfessorsComponent {

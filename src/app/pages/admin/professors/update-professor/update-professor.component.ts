@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Professor } from 'src/app/interfaces/professor';
@@ -8,6 +8,7 @@ import { ProfessorService } from 'src/app/service/professor/professor.service';
     selector: 'app-update-professor',
     templateUrl: './update-professor.component.html',
     styleUrls: ['./update-professor.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class UpdateProfessorComponent {

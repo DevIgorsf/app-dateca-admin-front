@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AuthModule } from "./service/auth/auth.module";
 import { MessageModule } from "./shared/message/message.module";
@@ -25,5 +25,5 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         FormsModule,
         ReactiveFormsModule,
         MessageModule,
-        AuthModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        AuthModule], providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class AppModule { }

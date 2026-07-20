@@ -14,7 +14,7 @@
         <div class="dropdown">
           <div class="dropdown-toggle navbar__navegacao-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-circle"></i>
-            <p >{{getFirstName(professor?.name)}}</p>
+            <p >{{getFirstName($safeNavigationMigration(professor?.name))}}</p>
           </div>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li class="navbar-list__item">

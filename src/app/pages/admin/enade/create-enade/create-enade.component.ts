@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EnadeWithImage } from 'src/app/interfaces/EnadeWithImage';
@@ -9,6 +9,7 @@ import { EnadeService } from 'src/app/service/enade/enade.service';
     selector: 'app-create-enade',
     templateUrl: './create-enade.component.html',
     styleUrls: ['./create-enade.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CreateEnadeComponent implements OnInit {

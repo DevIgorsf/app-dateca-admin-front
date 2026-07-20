@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Professor } from 'src/app/interfaces/professor';
@@ -8,6 +8,7 @@ import { ProfessorService } from 'src/app/service/professor/professor.service';
     selector: 'app-create-professor',
     templateUrl: './create-professor.component.html',
     styleUrls: ['./create-professor.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CreateProfessorComponent implements OnInit {
