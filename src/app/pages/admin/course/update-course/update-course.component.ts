@@ -12,9 +12,10 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 
 @Component({
-  selector: 'app-update-course',
-  templateUrl: './update-course.component.html',
-  styleUrls: ['./update-course.component.scss']
+    selector: 'app-update-course',
+    templateUrl: './update-course.component.html',
+    styleUrls: ['./update-course.component.scss'],
+    standalone: false
 })
 export class UpdateCourseComponent {
   allProfessors: Professor[] = [];

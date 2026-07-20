@@ -3,9 +3,10 @@ import { ProfessorService } from 'src/app/service/professor/professor.service';
 
 
 @Component({
-  selector: 'app-ranking',
-  templateUrl: './ranking.component.html',
-  styleUrls: ['./ranking.component.scss']
+    selector: 'app-ranking',
+    templateUrl: './ranking.component.html',
+    styleUrls: ['./ranking.component.scss'],
+    standalone: false
 })
 export class RankingComponent {
 

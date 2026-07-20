@@ -5,9 +5,10 @@ import { Professor } from 'src/app/interfaces/professor';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss'],
+    standalone: false
 })
 export class ProfileComponent {
   updateProfessorForm!: FormGroup;

@@ -57,7 +57,7 @@ $theme-colors: (
 ////////// COLOR VARIABLES //////////
 $content-bg: #000000;
 $footer-bg: $content-bg;
-$footer-color: color(dark);
+$footer-color: map-get($theme-colors, dark);
 $border-color: #2c2e33;
 
 ////////// COLOR VARIABLES //////////
@@ -113,10 +113,10 @@ $sidebar-bg: #191c24;
 $sidebar-menu-color: $text-muted;
 $sidebar-submenu-color: $sidebar-menu-color;
 $sidebar-menu-active-bg: darken($sidebar-bg, 5%);
-$sidebar-menu-active-color: color(white);
+$sidebar-menu-active-color: $white;
 $sidebar-menu-hover-bg: darken($sidebar-bg, 5%);
-$sidebar-menu-hover-color: color(white);
-$sidebar-submenu-hover-color: color(white);
+$sidebar-menu-hover-color: $white;
+$sidebar-submenu-hover-color: $white;
 $sidebar-menu-icon-color: #bba8bff5;
 $sidebar-menu-arrow-color: rgba(108, 114, 147, 0.36);
 $sidebar-menu-border-color: #f2edf3;
@@ -237,7 +237,7 @@ $table-hover-bg: $content-bg;
 $table-cell-padding: .9375rem;
 $table-border-color: $border-color;
 $table-inverse-bg: #2a2b32;
-$table-inverse-color: color(white);
+$table-inverse-color: $white;
 $table-dark-bg: #212529;
 $table-bg-level: 1;
 

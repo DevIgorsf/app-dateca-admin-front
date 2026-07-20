@@ -5,9 +5,10 @@ import { ProfessorService } from 'src/app/service/professor/professor.service';
 import { SidebarButtonService } from 'src/app/service/sidebar-button/sidebar-button.service';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    standalone: false
 })
 export class NavbarComponent {
   user$ = this.userService.retornaUsuario();

@@ -8,9 +8,10 @@ import { EnadePorcentagemDTO } from 'src/app/interfaces/EnadePorcentagemDTO';
 import { QuestionResultDTO } from 'src/app/interfaces/QuestionResultaDTO';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class DashboardComponent implements OnInit {
   course: string = '0';

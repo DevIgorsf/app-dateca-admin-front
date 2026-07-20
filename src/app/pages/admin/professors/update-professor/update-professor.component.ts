@@ -5,9 +5,10 @@ import { Professor } from 'src/app/interfaces/professor';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
 
 @Component({
-  selector: 'app-update-professor',
-  templateUrl: './update-professor.component.html',
-  styleUrls: ['./update-professor.component.scss']
+    selector: 'app-update-professor',
+    templateUrl: './update-professor.component.html',
+    styleUrls: ['./update-professor.component.scss'],
+    standalone: false
 })
 export class UpdateProfessorComponent {
   updateProfessorForm!: FormGroup

@@ -5,9 +5,10 @@ import { Professor } from 'src/app/interfaces/professor';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
 
 @Component({
-  selector: 'app-create-professor',
-  templateUrl: './create-professor.component.html',
-  styleUrls: ['./create-professor.component.scss']
+    selector: 'app-create-professor',
+    templateUrl: './create-professor.component.html',
+    styleUrls: ['./create-professor.component.scss'],
+    standalone: false
 })
 export class CreateProfessorComponent implements OnInit {
   registrationNumber: string = '';

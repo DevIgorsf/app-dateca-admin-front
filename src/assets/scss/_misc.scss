@@ -62,14 +62,14 @@ body {
 }
 
 pre {
-  background: color(gray-lighter);
+  background: map-get($colors, gray-lighter);
   padding: 15px;
   font-size: 14px;
 }
 
 code {
   padding: 5px;
-  color: theme-color(danger);
+  color: map-get($theme-colors, danger);
   font-family: $type1;
   font-weight: $font-weight-light;
   font-size: $default-font-size;

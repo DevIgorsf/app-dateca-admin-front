@@ -6,9 +6,10 @@ import { PointsEnum } from 'src/app/interfaces/pointsEnum';
 import { EnadeService } from 'src/app/service/enade/enade.service';
 
 @Component({
-  selector: 'app-create-enade',
-  templateUrl: './create-enade.component.html',
-  styleUrls: ['./create-enade.component.scss']
+    selector: 'app-create-enade',
+    templateUrl: './create-enade.component.html',
+    styleUrls: ['./create-enade.component.scss'],
+    standalone: false
 })
 export class CreateEnadeComponent implements OnInit {
   points!: string[];

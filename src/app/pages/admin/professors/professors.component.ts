@@ -8,9 +8,10 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
-  selector: 'app-professors',
-  templateUrl: './professors.component.html',
-  styleUrls: ['./professors.component.scss']
+    selector: 'app-professors',
+    templateUrl: './professors.component.html',
+    styleUrls: ['./professors.component.scss'],
+    standalone: false
 })
 export class ProfessorsComponent {
   professors: Professor[] = [];

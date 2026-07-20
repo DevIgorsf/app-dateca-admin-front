@@ -8,9 +8,10 @@ import { EnadeDTO } from 'src/app/interfaces/EnadeDTO';
 import { EnadeService } from 'src/app/service/enade/enade.service';
 
 @Component({
-  selector: 'app-enade',
-  templateUrl: './enade.component.html',
-  styleUrls: ['./enade.component.scss']
+    selector: 'app-enade',
+    templateUrl: './enade.component.html',
+    styleUrls: ['./enade.component.scss'],
+    standalone: false
 })
 export class EnadeComponent implements OnInit, OnDestroy {
   enades: EnadeDTO[] = [];

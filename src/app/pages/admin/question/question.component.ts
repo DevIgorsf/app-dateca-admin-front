@@ -8,9 +8,10 @@ import { QuestionService } from 'src/app/service/question/question.service';
 import { QuestionMultipleChoiceDTO } from 'src/app/interfaces/QuestionMultipleChoiceDTO';
 
 @Component({
-  selector: 'app-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+    selector: 'app-question',
+    templateUrl: './question.component.html',
+    styleUrls: ['./question.component.scss'],
+    standalone: false
 })
 export class QuestionComponent implements OnInit {
   questions: QuestionMultipleChoiceDTO[] = [];

@@ -8,9 +8,10 @@ import { Course } from 'src/app/interfaces/course';
 import { CourseService } from 'src/app/service/course/course.service';
 
 @Component({
-  selector: 'app-course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.scss']
+    selector: 'app-course',
+    templateUrl: './course.component.html',
+    styleUrls: ['./course.component.scss'],
+    standalone: false
 })
 export class CourseComponent implements OnInit {
   courses: Course[] = [];

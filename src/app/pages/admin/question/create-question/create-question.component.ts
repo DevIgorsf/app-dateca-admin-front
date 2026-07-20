@@ -9,9 +9,10 @@ import { CourseService } from 'src/app/service/course/course.service';
 import { QuestionService } from 'src/app/service/question/question.service';
 
 @Component({
-  selector: 'app-create-question',
-  templateUrl: './create-question.component.html',
-  styleUrls: ['./create-question.component.scss']
+    selector: 'app-create-question',
+    templateUrl: './create-question.component.html',
+    styleUrls: ['./create-question.component.scss'],
+    standalone: false
 })
 export class CreateQuestionComponent implements OnInit {
   points!: string[];
