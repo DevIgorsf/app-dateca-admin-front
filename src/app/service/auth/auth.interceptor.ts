@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import { TokenService } from './token.service';
 import { Router } from '@angular/router';
+import { isServicoIndisponivel, SERVICO_INDISPONIVEL_MENSAGEM } from '../http-error.util';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
-    private tokenService: TokenService, 
-    private router: Router) {}
+    private tokenService: TokenService,
+    private router: Router,
+    private toastr: ToastrService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -33,6 +36,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
       return next.handle(request).pipe(
         catchError((error: HttpErrorResponse) => {
+          if (isServicoIndisponivel(error)) {
+            this.toastr.error(SERVICO_INDISPONIVEL_MENSAGEM);
+            return throwError(() => error);
+          }
+
           if (error.status === 401 || error.status === 403) {
             this.tokenService.excluiToken()
             this.router.navigate(['/login']);

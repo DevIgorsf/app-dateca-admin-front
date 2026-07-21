@@ -1,5 +1,5 @@
-@use '../importacao-theme' as theme;
-@include theme.importacao-m3-scope;
+// O tema `.importacao-m3-scope` é emitido uma vez em `src/styles.scss`; ver o
+// comentário em `../_importacao-theme.scss`.
 
 :host {
   display: block;
@@ -64,10 +64,17 @@
   padding: 2rem;
 }
 
+// Ver importacao-upload.component.scss: as cores vêm dos tokens para seguir o
+// tema escolhido no app, e não apenas a preferência do sistema.
 .skeleton-linha {
   height: 20px;
   border-radius: 8px;
-  background: linear-gradient(90deg, #e8e0ea 25%, #f5f0f7 37%, #e8e0ea 63%);
+  background: linear-gradient(
+    90deg,
+    var(--app-surface-hover) 25%,
+    var(--app-border) 37%,
+    var(--app-surface-hover) 63%
+  );
   background-size: 400% 100%;
   animation: importacao-skeleton 1.4s ease infinite;
 }

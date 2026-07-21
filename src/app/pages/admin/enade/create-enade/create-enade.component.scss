@@ -1,181 +1,124 @@
-.question {
-    height: calc(100vh - 170px);
-    margin: 20px;
-}
+// Ver create-question.component.scss: campos e botões vêm de
+// `assets/scss/_components.scss`; aqui fica só o layout desta tela.
 
 .form {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  &__statement {
+    // Era `100vw`, o que ignorava a sidebar e gerava rolagem horizontal.
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  &__file,
+  &__img {
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.25rem 0;
+  }
 
-    &__statement {
-        width: 100vw;
-        margin-bottom: 30px;
+  &__img img {
+    width: 25%;
+    border-radius: var(--app-radius-sm);
+  }
+
+  &__select {
+    min-width: 200px;
+  }
+
+  &__title {
+    width: 30%;
+    min-width: 240px;
+    margin-bottom: 1.5rem;
+  }
+
+  &-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.75rem 0;
+
+    &__label {
+      flex: 0 0 auto;
+      color: var(--app-text-muted);
+      font-weight: 500;
     }
-
-    &__file,
-    &__img {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin: 20px 0;
-    }
-
-    &__img {
-        & img {
-            width: 25%;
-        }
-    }
-
-    &__select {
-        width: min-content;
-    }
-
-    &__title {
-        width: 30%;
-        margin-bottom: 30px;
-    }
-
-    &-item {
-        font-family: 'Poppins', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 81%;
-        box-sizing: border-box;
-        height: 40px;
-        margin-top: 5px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-        border-radius: 10px;
-        font-size: 16px;
-        padding: 6px 12px;
-
-        &.input-invalido {
-            border-color: red;
-            margin-bottom: 0;
-        }
-    }
-
-    &-group {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 20px;
-
-        &__label {
-            margin-right: 18px;
-        }
-
-        &__input,
-        &__textarea {
-            width: 100%;
-            border-radius: 10px;
-            font-size: 16px;
-            padding: 6px 12px;
-        }
-
-        &__textarea {
-            height: 100px;
-        }
-    }
-
-    &-button {
-        &-adicionar,
-        &-cancelar {
-            background: #979797d7;
-            border: 2px solid #979797d7;
-            color: #fff;
-            font-size: 20px;
-            cursor: pointer;
-            width: 160px;
-            height: 40px;
-            border-radius: 10px;
-
-            &:hover {
-                background: #979797;
-                border: 2px solid #979797;
-            }
-        }
-
-        &-adicionar {
-            background: #0083fd;
-            border: 2px solid #0083fd;
-
-            &:hover {
-                background: #47a5fc;
-                border: 2px solid #47a5fc;
-            }
-        }
-    }
+  }
 }
 
+/* Carrossel de imagens da questão ---------------------------------------- */
+
 .slide__image {
-    max-width: 100%;
-    max-height: 300px;
-    height: auto;
-    display: block; 
-    margin: 0 auto; 
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--app-radius-sm);
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.carousel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+
+    color: var(--app-text-muted);
+    background: var(--app-surface-2);
+    border: 1px solid var(--app-border);
+    border-radius: 100%;
+    cursor: pointer;
+    transition:
+      background-color var(--app-transition),
+      color var(--app-transition);
+
+    &:hover {
+      background: var(--app-surface-hover);
+      color: var(--app-text);
+    }
 
     &--hidden {
       display: none;
     }
-}
+  }
 
-.carousel {
+  &__indicator {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
     width: 100%;
+    justify-content: center;
+    margin-top: 10px;
 
-    &__button {
-        padding: 10px;
-        color: #fff;
-        background: none;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.2s; /* Adiciona uma transição suave */
+    > .indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--app-border-strong);
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background-color var(--app-transition);
 
-        &:hover {
-            transform: scale(2.0); /* Aumenta o tamanho do botão em 20% ao passar o mouse */
-        }
+      &.active {
+        background-color: var(--app-brand);
+      }
     }
-
-    &__button {
-        padding: 10px;
-        color: #fff;
-        background: none;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.2s; /* Adiciona uma transição suave */
-
-        &:hover {
-            transform: scale(2.0); /* Aumenta o tamanho do botão em 20% ao passar o mouse */
-        }
-    }
-
-    &__button--hidden {
-        display: none;
-    }
-
-    &__indicator {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px;
-
-        & > .indicator {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #ccc;
-            margin: 0 5px;
-            cursor: pointer;
-
-            &.active {
-                background-color: #333;
-            }
-        }
-    }
+  }
 }

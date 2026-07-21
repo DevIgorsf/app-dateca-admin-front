@@ -1,113 +1,145 @@
 .nav {
-  min-height: calc(100vh - 70px);
+  min-height: 100vh;
   height: 100vh;
   padding: 0;
-  background: #191c24;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background: var(--app-sidebar-bg);
+  border-right: 1px solid var(--app-border);
+  transition:
+    width var(--app-transition),
+    background-color var(--app-transition),
+    border-color var(--app-transition);
 
   .nav-logo {
-    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--app-navbar-height);
+    width: 100%;
+    padding: 0 0.75rem;
+    border-bottom: 1px solid var(--app-border);
+    overflow: hidden;
+
+    // O PNG traz o próprio fundo escuro embutido; arredondar as bordas faz
+    // dele uma "placa" de marca, em vez de um retângulo solto no tema claro.
+    img {
+      max-width: 100%;
+      max-height: 38px;
+      object-fit: contain;
+      border-radius: var(--app-radius-sm);
+    }
   }
 }
 
 .sidebar-expanded {
-  width: 220px;
+  width: var(--app-sidebar-width);
 }
 
 .sidebar-collapsed {
-  width: 64px;
+  width: var(--app-sidebar-width-collapsed);
 }
 
 .sidebar {
   display: block;
-
-  min-height: calc(100vh - 70px);
-  font-family: sans-serif;
-  padding: 0;
+  width: 100%;
+  padding: 0.75rem 0;
+  margin: 0;
+  list-style: none;
 }
 
+/* ---------------------------------------------------------------------------
+   Itens de navegação.
+
+   Cada item tem uma cor de acento própria, exposta como `--item-accent`. Antes
+   esses valores eram hex fixos escritos em `style="..."` no template, o que
+   deixava ícones amarelos e dourados ilegíveis sobre fundo claro; agora vêm
+   dos tokens, que já têm versão para cada tema.
+   --------------------------------------------------------------------------- */
+
 .sidebar-item {
-  padding-right: 20px;
+  --item-accent: var(--app-text-muted);
+  padding-right: 12px;
 
   .sidebar-link {
     text-decoration: none;
     display: flex;
     align-items: center;
     white-space: nowrap;
-    padding: 0.8rem 10px 0.8rem 1.1rem;
-    color: #6c7293;
-    transition-property: color;
-    -webkit-transition-property: color;
+    gap: 0.75rem;
+    padding: 0.5rem 10px 0.5rem 1rem;
     height: 46px;
-    border-radius: 0px 100px 100px 0px;
+
+    color: var(--app-text-muted);
+    border-radius: 0 var(--app-radius-pill) var(--app-radius-pill) 0;
     cursor: pointer;
+    transition:
+      background-color var(--app-transition),
+      color var(--app-transition);
 
     .sidebar-item__icon {
-      margin-right: 0.5rem;
-      font-size: .8125rem;
-      line-height: 1;
-      background: rgba(108,114,147,.2);
-      width: 31px;
-      height: 31px;
-      border-radius: 100%;
+      flex: 0 0 auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      width: 32px;
+      height: 32px;
+
+      font-size: 0.9375rem;
+      line-height: 1;
+      color: var(--item-accent);
+      background: color-mix(in srgb, var(--item-accent) 14%, transparent);
+      border-radius: 100%;
+      transition: background-color var(--app-transition);
     }
 
     .sidebar-item__title {
       color: inherit;
       display: inline-block;
-      font-size: .9375rem;
+      font-size: 0.9375rem;
       line-height: 1;
       vertical-align: middle;
     }
 
     .sidebar-item__title--none {
-      color: inherit;
       display: none;
-      font-size: .9375rem;
-      line-height: 1;
-      vertical-align: middle;
     }
   }
 
-  &.active {
-    > .sidebar-link {
-      background: #0f1015;
-      position: relative;
-      &:before {
-        content: "";
-        width: 3px;
-        height: 100%;
-        background: #0090e7;
-        display: inline-block;
-        position: absolute;
-        left: 0;
-        top: 0;
-      }
-      .sidebar-item__title {
-        color: #ffffff;
-      }
-      i {
-        color: #ffffff
-      }
-    }
+  &:hover > .sidebar-link {
+    background: var(--app-surface-hover);
+    color: var(--app-text);
   }
 
-  &:hover {
-    .sidebar-link {
-      background: #0f1015;
-      position: relative;
-      .sidebar-item__title {
-        transition: 0.25s ease-out;
-        color: #ffffff;
-      }
-      i {
-        color: #ffffff
-      }
+  &.active > .sidebar-link {
+    position: relative;
+    background: var(--app-brand-soft);
+    color: var(--app-text);
+    font-weight: 500;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--app-brand);
+    }
+
+    .sidebar-item__icon {
+      background: color-mix(in srgb, var(--item-accent) 22%, transparent);
     }
   }
 }
 
-
+.sidebar-item--red    { --item-accent: var(--app-accent-red); }
+.sidebar-item--blue   { --item-accent: var(--app-accent-blue); }
+.sidebar-item--amber  { --item-accent: var(--app-accent-amber); }
+.sidebar-item--violet { --item-accent: var(--app-accent-violet); }
+.sidebar-item--green  { --item-accent: var(--app-accent-green); }
+.sidebar-item--teal   { --item-accent: var(--app-accent-teal); }
+.sidebar-item--gold   { --item-accent: var(--app-accent-gold); }

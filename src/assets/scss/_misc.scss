@@ -1,12 +1,11 @@
-/* Miscellanoeous */
+/* ============================================================================
+   Estrutura de página: wrappers do shell administrativo.
+   ============================================================================ */
+
 body,
 html {
   overflow-x: hidden;
-  padding-right: 0 !important; // resets padding right added by Bootstrap modal
-}
-
-body {
-  background: $content-bg;
+  padding-right: 0 !important; // anula o padding que o modal do Bootstrap injeta
 }
 
 *:-moz-full-screen,
@@ -15,13 +14,19 @@ body {
   overflow: auto;
 }
 
+.container-scroller {
+  display: flex;
+  position: relative;
+}
+
 .page-body-wrapper {
   min-height: calc(100vh - #{$navbar-height});
-
   padding-left: 0;
   padding-right: 0;
   width: 100%;
-  transition: width $action-transition-duration $action-transition-timing-function, margin $action-transition-duration $action-transition-timing-function;
+  transition:
+    width $action-transition-duration $action-transition-timing-function,
+    margin $action-transition-duration $action-transition-timing-function;
 
   &.full-page-wrapper {
     width: 100%;
@@ -29,13 +34,15 @@ body {
     padding-top: 0;
   }
 
-  @media (max-width:992px) {
+  @media (max-width: 992px) {
     width: 100%;
   }
 }
 
 .main-panel {
-  transition: width $action-transition-duration $action-transition-timing-function, margin $action-transition-duration $action-transition-timing-function;
+  transition:
+    width $action-transition-duration $action-transition-timing-function,
+    margin $action-transition-duration $action-transition-timing-function;
   width: 100%;
   min-height: calc(100vh - #{$navbar-height});
   padding-top: $navbar-height;
@@ -44,110 +51,76 @@ body {
     margin-left: 0;
     width: 100%;
   }
+
   &.main-panel-only {
     transition: none;
   }
 }
 
 .content-wrapper {
-  // background: $content-bg;
-  padding: 1.875rem 1.75rem;
+  padding: $content-padding-y $content-padding-x;
   width: 100%;
   overflow-y: auto;
+
+  @include media-breakpoint-down(md) {
+    padding: 1.25rem 1rem;
+  }
 }
 
-.container-scroller {
-  display: flex;
-  position: relative;
-}
-
-pre {
-  background: map-get($colors, gray-lighter);
-  padding: 15px;
-  font-size: 14px;
-}
-
-code {
-  padding: 5px;
-  color: map-get($theme-colors, danger);
-  font-family: $type1;
-  font-weight: $font-weight-light;
-  font-size: $default-font-size;
-  border-radius: 4px;
-}
+/* ---------------------------------------------------------------------------
+   Cabeçalho de página
+   --------------------------------------------------------------------------- */
 
 .page-header {
-  @extend .d-flex;
-  @extend .justify-content-between;
-  @extend .align-items-center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 0 1.5rem 0;
+
   .breadcrumb {
     border: 0;
     margin-bottom: 0;
   }
 }
+
 .page-title {
-  color: #ffffff;
+  color: var(--app-text);
   font-size: 1.125rem;
   margin-bottom: 0;
+
   .page-title-icon {
     display: inline-block;
     width: 36px;
     height: 36px;
-    border-radius: 4px;
+    border-radius: var(--app-radius-sm);
     text-align: center;
-    box-shadow: 0px 3px 8.3px 0.7px rgba(163, 93, 255, 0.35);
+    box-shadow: var(--app-shadow-sm);
+
     i {
-      font-size: .9375rem;
+      font-size: 0.9375rem;
       line-height: 36px;
     }
   }
 }
-.purchase-popup {
-  width: 100%;
-  z-index: 9999;
-  background: $card-bg;
+
+/* ---------------------------------------------------------------------------
+   Código
+   --------------------------------------------------------------------------- */
+
+pre {
+  background: var(--app-surface-2);
+  color: var(--app-text);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
   padding: 15px;
-  display: flex;
-  @include media-breakpoint-down(md) {
-    padding: 15px 20px;
-    display: block;
-  }
-
-
-  .btn {
-    margin-right: 20px;
-    font-weight: 500;
-    &.purchase-button {
-      color: #fff;
-      border: none;
-      line-height: 1;
-      vertical-align: middle;
-      min-height: auto;
-    }
-  }
-
-  p {
-    margin-bottom: auto;
-    margin-top: auto;
-    color: $body-color;
-    font-weight: 400;
-    vertical-align: middle;
-    line-height: 1;
-    @include media-breakpoint-down(md) {
-      margin-bottom: 10px;
-    }
-  }
-
-  i {
-    vertical-align: middle;
-    line-height: 1;
-    margin: auto 0;
-    color: darken(#e4e4e4,20%);
-  }
+  font-size: 14px;
 }
-.removeProbanner {
-  #proBanner {
-    display: none;
-  }
+
+code {
+  padding: 2px 6px;
+  color: var(--app-danger);
+  background: var(--app-surface-2);
+  font-weight: $font-weight-light;
+  font-size: $default-font-size;
+  border-radius: 4px;
 }

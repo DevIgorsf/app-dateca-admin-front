@@ -1,16 +1,17 @@
-.question {
-  height: calc(100vh - 170px);
-  margin: 20px;
-}
+// A aparência dos campos e botões (`.form-item`, `.form-group__input`,
+// `.form-button-adicionar`, …) vem de `assets/scss/_components.scss`, junto com
+// as demais telas de cadastro. Aqui fica só o que é específico desta tela.
 
 .form {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
+  gap: 1rem;
 
   &__statement {
-    width: 100vw;
-    margin-bottom: 30px;
+    // Era `100vw`, o que ignorava a sidebar e gerava rolagem horizontal.
+    width: 100%;
+    margin-bottom: 1.5rem;
   }
 
   &__file,
@@ -18,100 +19,46 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.25rem 0;
   }
 
-  &__img {
-    & img {
-      width: 25%;
-    }
+  &__img img {
+    width: 25%;
+    border-radius: var(--app-radius-sm);
   }
 
   &__select {
     width: 50%;
-  }
-
-  &-item {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 81%;
-    box-sizing: border-box;
-    height: 40px;
-    margin-top: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    font-size: 16px;
-    padding: 6px 12px;
-
-    &.input-invalido {
-      border-color: red;
-      margin-bottom: 0;
-    }
-  }
-
-  &-button {
-    &-adicionar,
-    &-cancelar {
-      background: #979797d7;
-      border: 2px solid #979797d7;
-      color: #FFF;
-      font-size: 20px;
-      cursor: pointer;
-      width: 160px;
-      height: 40px;
-      border-radius: 10px;
-
-      &:hover {
-        background: #979797;
-        border: 2px solid #979797;
-      }
-    }
-
-    &-adicionar {
-      background: #0083FD;
-      border: 2px solid #0083FD;
-
-      &:hover {
-        background: #47A5FC;
-        border: 2px solid #47A5FC;
-      }
-    }
+    min-width: 240px;
   }
 
   &-group {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 20px;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.75rem 0;
 
     &__label {
-      margin-right: 18px;
-    }
-
-    &__input,
-    &__textarea {
-      width: 100%;
-      height: 100px;
-      border-radius: 10px;
-      font-size: 16px;
-      padding: 6px 12px;
-    }
-
-    &__textarea {
-      height: 100px;
+      flex: 0 0 auto;
+      color: var(--app-text-muted);
+      font-weight: 500;
     }
   }
 }
+
+/* Carrossel de imagens da questão ---------------------------------------- */
 
 .slide__image {
   max-width: 100%;
   max-height: 300px;
   height: auto;
-  display: block; 
-  margin: 0 auto; 
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--app-radius-sm);
 
   &--hidden {
     display: none;
@@ -124,16 +71,28 @@
   align-items: center;
   width: 100%;
 
+  // Os botões eram brancos fixos e cresciam 2x no hover (`scale(2)`),
+  // atropelando a imagem. Agora são alvos redondos estáveis, com as cores
+  // vindo dos tokens.
   &__button {
-    padding: 10px;
-    color: #FFF;
-    background: none;
-    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+
+    color: var(--app-text-muted);
+    background: var(--app-surface-2);
+    border: 1px solid var(--app-border);
+    border-radius: 100%;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition:
+      background-color var(--app-transition),
+      color var(--app-transition);
 
     &:hover {
-      transform: scale(2.0);
+      background: var(--app-surface-hover);
+      color: var(--app-text);
     }
   }
 
@@ -143,16 +102,17 @@
     justify-content: center;
     margin-top: 10px;
 
-    & > .indicator {
+    > .indicator {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background-color: #ccc;
+      background-color: var(--app-border-strong);
       margin: 0 5px;
       cursor: pointer;
+      transition: background-color var(--app-transition);
 
       &.active {
-        background-color: #333;
+        background-color: var(--app-brand);
       }
     }
   }

@@ -7,6 +7,7 @@ import { QuestionMultipleChoiceWithImage } from 'src/app/interfaces/QuestionMult
 import { QuestionResultDTO } from 'src/app/interfaces/QuestionResultaDTO';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 import { environment } from 'src/environments/environment';
+import { isServicoIndisponivel, SERVICO_INDISPONIVEL_MENSAGEM } from 'src/app/service/http-error.util';
 
 const API = environment.ApiUrl;
 
@@ -34,7 +35,7 @@ export class QuestionService {
       error => {
         if (error.status === 404) {
           this.toastr.error("Erro 404: Nenhuma questão encontrada.");
-        } else {
+        } else if (!isServicoIndisponivel(error)) {
           this.toastr.error("Erro inesperado:", error);
         }
       }
@@ -47,7 +48,9 @@ export class QuestionService {
         this.questionsSubject.next([...this.questionsSubject.getValue(), newQuestion]);
       }),
       catchError(error => {
-        console.error('Erro ao criar pergunta:', error);
+        if (!isServicoIndisponivel(error)) {
+          console.error('Erro ao criar pergunta:', error);
+        }
 
         return throwError(error);
       })
@@ -87,7 +90,11 @@ export class QuestionService {
         this.toastr.success('Questão atualizada com sucesso!');
       }),
       catchError(error => {
-        this.toastr.error('Erro ao criar pergunta:', error);
+        if (isServicoIndisponivel(error)) {
+          this.toastr.error(SERVICO_INDISPONIVEL_MENSAGEM);
+        } else {
+          this.toastr.error('Erro ao criar pergunta:', error);
+        }
         return throwError(error);
       })
     ).subscribe();
@@ -106,7 +113,9 @@ export class QuestionService {
         this.questionsSubject.next(updatedQuestions);
       }),
       catchError(error => {
-        this.toastr.error(`Erro na atualização da pergunta: ${error.message}`);
+        if (!isServicoIndisponivel(error)) {
+          this.toastr.error(`Erro na atualização da pergunta: ${error.message}`);
+        }
         return throwError(error);
       })
     ).subscribe();

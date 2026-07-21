@@ -1,20 +1,19 @@
 <nav class="nav fixed-top"  [ngClass]="{'sidebar-expanded': sidebarExpanded, 'sidebar-collapsed': !sidebarExpanded}" id="sidebar">
   <div class="nav-logo">
-    <!-- <h1 class="nav-logo__title">DATECA</h1> -->
-    <img src="assets/images/DATECA.png">
+    <img src="assets/images/DATECA.png" alt="DATECA">
   </div>
   <ul class="sidebar">
-    <li class="sidebar-item" [ngClass]="{ 'active': dashboard.isActive }">
+    <li class="sidebar-item sidebar-item--red" [ngClass]="{ 'active': dashboard.isActive }">
       <a class="sidebar-link" routerLink="/admin/dashboard" routerLinkActive #dashboard="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-newspaper" style="color: #b54747;"></i>
+          <i class="bi bi-newspaper"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Dashboard
         </span>
       </a>
     </li>
-    <li class="sidebar-item" [ngClass]="{ 'active': professors.isActive }">
+    <li class="sidebar-item sidebar-item--green" [ngClass]="{ 'active': professors.isActive }">
       <a class="sidebar-link" routerLink="/admin/professor" routerLinkActive #professors="routerLinkActive">
         <span class="sidebar-item__icon">
           <i class="bi bi-mortarboard-fill"></i>
@@ -24,39 +23,39 @@
         </span>
       </a>
     </li>
-    <li class="sidebar-item" [ngClass]="{ 'active': course.isActive }">
+    <li class="sidebar-item sidebar-item--blue" [ngClass]="{ 'active': course.isActive }">
       <a class="sidebar-link" routerLink="/admin/materia" routerLinkActive #course="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-journal-bookmark-fill" style="color: #4e80e3;"></i>
+          <i class="bi bi-journal-bookmark-fill"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Materias
         </span>
       </a>
     </li>
-    <li class="sidebar-item" [ngClass]="{ 'active': question.isActive }">
+    <li class="sidebar-item sidebar-item--amber" [ngClass]="{ 'active': question.isActive }">
       <a class="sidebar-link" routerLink="/admin/questao" routerLinkActive #question="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-list-check" style="color: #f2c55c;"></i>
+          <i class="bi bi-list-check"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Questões
         </span>
       </a>
     </li>
-    <li class="sidebar-item" [ngClass]="{ 'active': enade.isActive }">
+    <li class="sidebar-item sidebar-item--violet" [ngClass]="{ 'active': enade.isActive }">
       <a class="sidebar-link" routerLink="/admin/enade" routerLinkActive #enade="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-clipboard2-check" style="color: #6e6abb;"></i>
+          <i class="bi bi-clipboard2-check"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Enade
         </span>
       </a>
     </li>
-    <li class="sidebar-item" [ngClass]="{ 'active': ranking.isActive }">
+    <li class="sidebar-item sidebar-item--gold" [ngClass]="{ 'active': ranking.isActive }">
       <a class="sidebar-link" routerLink="/admin/ranking" routerLinkActive #ranking="routerLinkActive">
-        <span class="sidebar-item__icon" style="color: #ebbe3f;">
+        <span class="sidebar-item__icon">
           <i class="bi bi-award"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
@@ -64,9 +63,9 @@
         </span>
       </a>
     </li>
-    <li class="sidebar-item" [ngClass]="{ 'active': importacao.isActive }">
+    <li class="sidebar-item sidebar-item--teal" [ngClass]="{ 'active': importacao.isActive }">
       <a class="sidebar-link" routerLink="/admin/importacao" routerLinkActive #importacao="routerLinkActive">
-        <span class="sidebar-item__icon" style="color: #4fb0a5;">
+        <span class="sidebar-item__icon">
           <i class="bi bi-file-earmark-arrow-up"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">

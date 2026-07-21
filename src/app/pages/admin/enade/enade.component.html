@@ -1,12 +1,15 @@
 
 <div class="question">
-    <button type="button" 
-    class="question-button mb-4 text-white" 
-    title="Adicionar questão"
-    routerLink="adicionar-enade">
-      <i class="bi bi-plus"></i>
+  <div class="app-page__toolbar">
+    <div>
+      <h1 class="app-page__title">Enade</h1>
+      <p class="app-page__subtitle">Provas e questões do Enade cadastradas no sistema.</p>
+    </div>
+    <button type="button" class="btn btn-primary" title="Adicionar questão" routerLink="adicionar-enade">
+      <i class="bi bi-plus-lg me-2"></i>Nova questão
     </button>
-  
+  </div>
+
   <div class="mat-elevation-z8">
     <table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
   

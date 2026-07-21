@@ -1,8 +1,5 @@
-.course {
-  height: calc(100vh - 170px);
-  margin: 20px;
-}
-
-i {
+// Espaçamento e superfície da listagem vêm de `.content-wrapper` e
+// `.mat-elevation-z8` (assets/scss/_components.scss).
+.course i {
   cursor: pointer;
 }

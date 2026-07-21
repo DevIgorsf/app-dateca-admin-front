@@ -1,13 +1,65 @@
 .dashboard-card {
-  width: 265px;
-  height: 120px;
-  border-radius: 10px;
+  --card-accent: var(--app-accent-blue);
 
-  display: flex;
-  justify-content: space-between;
+  height: 100%;
+  border-radius: var(--app-radius);
+  transition:
+    transform var(--app-transition),
+    box-shadow var(--app-transition);
 
-  mat-card-content{
-    display: flex;
-    justify-content: space-between;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--app-shadow-md) !important;
   }
 }
+
+.dashboard-card__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.dashboard-card__text {
+  min-width: 0;
+}
+
+.dashboard-card__title {
+  color: var(--app-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.375rem;
+}
+
+.dashboard-card__value {
+  color: var(--app-text);
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.dashboard-card__icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+
+  font-size: 1.5rem;
+  color: var(--card-accent);
+  background: color-mix(in srgb, var(--card-accent) 14%, transparent);
+  border-radius: var(--app-radius);
+}
+
+.dashboard-card--blue   { --card-accent: var(--app-accent-blue); }
+.dashboard-card--green  { --card-accent: var(--app-accent-green); }
+.dashboard-card--amber  { --card-accent: var(--app-accent-amber); }
+.dashboard-card--violet { --card-accent: var(--app-accent-violet); }
+.dashboard-card--teal   { --card-accent: var(--app-accent-teal); }
+.dashboard-card--red    { --card-accent: var(--app-accent-red); }
+.dashboard-card--gold   { --card-accent: var(--app-accent-gold); }

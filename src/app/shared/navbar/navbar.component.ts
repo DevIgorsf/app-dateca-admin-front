@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/auth/user.service';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
 import { SidebarButtonService } from 'src/app/service/sidebar-button/sidebar-button.service';
+import { ThemeService } from 'src/app/service/theme/theme.service';
 
 @Component({
     selector: 'app-navbar',
@@ -11,50 +12,36 @@ import { SidebarButtonService } from 'src/app/service/sidebar-button/sidebar-but
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   user$ = this.userService.retornaUsuario();
   professor: any;
-  isDarkMode: boolean = false;
+
+  // A navbar é `fixed-top` e precisa começar onde a sidebar termina; antes o
+  // recuo era fixo em 244px e deixava uma faixa vazia com a sidebar recolhida.
+  sidebarExpanded: boolean = true;
+
+  private readonly themeService = inject(ThemeService);
+  readonly isDarkMode = this.themeService.theme;
 
   constructor(
-    private userService: UserService, 
+    private userService: UserService,
     private router: Router,
     private professorService: ProfessorService,
     private sidebarButtonService: SidebarButtonService,
   ) {}
 
   ngOnInit(): void {
-    const isDarkModeSession = sessionStorage.getItem('isDarkMode');
-    if (isDarkModeSession !== null) {
-      this.isDarkMode = isDarkModeSession === 'true';
-      this.updateDarkMode();
-    }
+    this.sidebarButtonService.sidebarExpanded$.subscribe((expanded) => {
+      this.sidebarExpanded = expanded;
+    });
 
     this.professorService.getPerfil().subscribe((professor) => {
         this.professor = professor;
     });
   }
 
-  onSlideToggleChange(event: any) {
-    this.isDarkMode = event.checked;
-    if (this.isDarkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
-    this.saveDarkModeState();
-  }
-
-  private updateDarkMode() {
-    if (this.isDarkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
-  }
-
-  private saveDarkModeState() {
-    sessionStorage.setItem('isDarkMode', this.isDarkMode.toString());
+  toggleTheme() {
+    this.themeService.toggle();
   }
 
   toggleSidebar() {

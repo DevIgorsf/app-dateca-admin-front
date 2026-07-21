@@ -1,34 +1,50 @@
-
 .form2 {
-  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: 81%;
+  align-items: stretch;
+  width: 100%;
 }
 
+// Antes o label tinha `width: 30px; height: 20px` e cor branca fixa: o texto
+// vazava da caixa e sumia em qualquer fundo claro.
 .label {
   display: flex;
-  width: 30px;
-  height: 20px;
+  align-items: center;
 
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-
-  color: #fff;
+  color: var(--app-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
+// Mesma aparência de `.form-item`; repetida aqui porque a classe é local ao
+// componente e não bate com o seletor global.
 .input {
   box-sizing: border-box;
   width: 100%;
   height: 44px;
-  margin-top: 9px;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.875rem;
 
-  background:  #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
+  color: var(--app-text);
+  background: var(--app-surface);
+  border: 1px solid var(--app-border-strong);
+  border-radius: var(--app-radius-sm);
+  font-size: 1rem;
+  transition:
+    border-color var(--app-transition),
+    box-shadow var(--app-transition);
 
-  font-size: 16px;
-  padding: 6px 12px;
+  &::placeholder {
+    color: var(--app-text-subtle);
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--app-brand);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--app-brand);
+    box-shadow: var(--app-ring);
+  }
 }

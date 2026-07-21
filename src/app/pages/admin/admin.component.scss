@@ -1,7 +1,14 @@
-.sidebar-expanded {
-  margin-left: 220px;
-}
-  
+// Recuo do conteúdo para não ficar sob a sidebar `fixed-top`. Os mesmos tokens
+// alimentam o recuo da navbar, então os três elementos se movem juntos.
+.sidebar-expanded,
 .sidebar-collapsed {
-  margin-left: 64px;
+  transition: margin-left var(--app-transition);
+}
+
+.sidebar-expanded {
+  margin-left: var(--app-sidebar-width);
+}
+
+.sidebar-collapsed {
+  margin-left: var(--app-sidebar-width-collapsed);
 }

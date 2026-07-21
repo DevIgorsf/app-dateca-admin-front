@@ -1,5 +1,5 @@
-@use '../importacao-theme' as theme;
-@include theme.importacao-m3-scope;
+// O tema `.importacao-m3-scope` é emitido uma vez em `src/styles.scss`; ver o
+// comentário em `../_importacao-theme.scss`.
 
 :host {
   display: block;
@@ -60,10 +60,19 @@
   color: var(--mat-sys-on-surface-variant, #49454f);
 }
 
+// Cores vindas dos tokens: antes o skeleton tinha um par de gradientes fixos
+// trocados por `@media (prefers-color-scheme: dark)`, que segue só o sistema
+// operacional — ele ficava claro quando o usuário escolhia o tema escuro
+// manualmente pelo botão da navbar.
 .skeleton-linha {
   height: 14px;
   border-radius: 7px;
-  background: linear-gradient(90deg, #e8e0ea 25%, #f5f0f7 37%, #e8e0ea 63%);
+  background: linear-gradient(
+    90deg,
+    var(--app-surface-hover) 25%,
+    var(--app-border) 37%,
+    var(--app-surface-hover) 63%
+  );
   background-size: 400% 100%;
   animation: importacao-skeleton 1.4s ease infinite;
 }
@@ -84,11 +93,4 @@
   gap: 0.75rem;
   text-align: center;
   padding: 1.5rem 0;
-}
-
-@media (prefers-color-scheme: dark) {
-  .skeleton-linha {
-    background: linear-gradient(90deg, #322f35 25%, #48454b 37%, #322f35 63%);
-    background-size: 400% 100%;
-  }
 }

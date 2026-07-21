@@ -1,12 +1,20 @@
 @use '@angular/material' as mat;
+@use '../../../../assets/scss/material-bridge' as bridge;
 
-// Tema Material 3 dedicado à ilha "Importação Inteligente de Provas". O restante do
-// admin-front hoje usa Material 2 + Bootstrap (ver src/styles.scss); em vez de trocar o tema
-// global (o que quebraria as telas existentes), este mixin gera as variáveis M3 escopadas pela
-// classe .importacao-m3-scope. Como variáveis CSS custom herdam normalmente pela árvore do DOM
-// (a encapsulação de estilos do Angular não bloqueia herança de custom properties), basta
-// incluir este mixin uma vez no componente raiz de cada rota da feature — os componentes
-// filhos (ex.: o editor de questão) herdam o mesmo tema automaticamente.
+// Tema Material 3 dedicado à ilha "Importação Inteligente de Provas". A feature
+// mantém a cor de marca própria (violeta), mas reaproveita as superfícies do
+// app — assim ela não vira uma ilha visual, e acompanha a troca claro/escuro
+// como o resto das telas.
+//
+// O mixin é escopado pela classe .importacao-m3-scope. Como custom properties
+// CSS herdam normalmente pela árvore do DOM (a encapsulação de estilos do
+// Angular não bloqueia herança), basta a classe estar no componente raiz de
+// cada rota da feature — os filhos (ex.: o editor de questão) herdam o tema.
+//
+// IMPORTANTE: este mixin é incluído uma única vez, em `src/styles.scss`.
+// Antes ele era incluído nos dois componentes-raiz da feature, o que duplicava
+// ~9 kB de tokens em cada folha de estilo e estourava o budget
+// `anyComponentStyle` (4 kB) — o build de produção falhava por isso.
 @mixin importacao-m3-scope {
   .importacao-m3-scope {
     @include mat.theme((
@@ -14,5 +22,7 @@
       typography: Roboto,
       density: 0,
     ));
+
+    @include bridge.app-material-surfaces;
   }
 }

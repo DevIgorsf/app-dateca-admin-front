@@ -1,61 +1,52 @@
 <div class="dashboard">
+  <header>
+    <h1 class="app-page__title">Dashboard</h1>
+    <p class="app-page__subtitle">Visão geral do conteúdo cadastrado e do desempenho dos alunos.</p>
+  </header>
+
   <div class="dashboard__list">
-    <div class="dashboard__list-item">
-      <app-card
-        title = "Matérias cadastradas"
-        [conteudo] = "course"
-        icon = "bi bi-journal-bookmark-fill"
-        style="color: #4e80e3;"
-        >
-      </app-card>
-    </div>
+    <app-card
+      title="Matérias cadastradas"
+      [conteudo]="course"
+      icon="bi bi-journal-bookmark-fill"
+      accent="blue">
+    </app-card>
 
-    <div class="dashboard__list-item">
-      <app-card
-        title = "Professors cadastradas"
-        [conteudo] = "professor"
-        icon = "bi bi-mortarboard-fill"
-        >
-      </app-card>
-    </div>
+    <app-card
+      title="Professores cadastrados"
+      [conteudo]="professor"
+      icon="bi bi-mortarboard-fill"
+      accent="green">
+    </app-card>
 
-    <div class="dashboard__list-item">
-      <app-card
-      title = "Questões cadastradas"
-      [conteudo] = "question"
-      icon = "bi bi-list-check"
-      style="color: #f2c55c;"
-      >
-      </app-card>
-    </div>
+    <app-card
+      title="Questões cadastradas"
+      [conteudo]="question"
+      icon="bi bi-list-check"
+      accent="amber">
+    </app-card>
 
-    <div class="dashboard__list-item">
-      <app-card
-        title = "Enade cadastradas"
-        [conteudo] = "enade"
-        icon = "bi bi-clipboard2-check"
-        style="color: #6e6abb;"
-        >
-      </app-card>
-    </div>
-    <div class="dashboard__list-item">
-      <app-card
-        title = "Alunos cadastradas"
-        [conteudo] = "student"
-        icon = "bi bi-person-fill"
-        style="color: #6abb8e;"
-        >
-      </app-card>
-    </div>
+    <app-card
+      title="Enade cadastradas"
+      [conteudo]="enade"
+      icon="bi bi-clipboard2-check"
+      accent="violet">
+    </app-card>
 
+    <app-card
+      title="Alunos cadastrados"
+      [conteudo]="student"
+      icon="bi bi-person-fill"
+      accent="teal">
+    </app-card>
   </div>
+
   <div class="dashboard__chart">
-    <div class="dashboard__chart-item">
+    <div class="dashboard__chart-item app-surface">
       <canvasjs-chart [options]="chartEnade"></canvasjs-chart>
     </div>
-    <div class="dashboard__chart-item">
+    <div class="dashboard__chart-item app-surface">
       <canvasjs-chart [options]="chartQuestion"></canvasjs-chart>
     </div>
   </div>
-
 </div>

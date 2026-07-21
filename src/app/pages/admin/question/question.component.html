@@ -1,8 +1,14 @@
 
 <div class="question">
-  <a class="btn btn-primary mb-4 fs-4 text-white" routerLink="adicionar-questao">
-    <i class="bi bi-plus"></i>
-  </a>
+  <div class="app-page__toolbar">
+    <div>
+      <h1 class="app-page__title">Questões</h1>
+      <p class="app-page__subtitle">Banco de questões disponível para os alunos.</p>
+    </div>
+    <a class="btn btn-primary" routerLink="adicionar-questao">
+      <i class="bi bi-plus-lg me-2"></i>Nova questão
+    </a>
+  </div>
 
 <div class="mat-elevation-z8">
   <table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">

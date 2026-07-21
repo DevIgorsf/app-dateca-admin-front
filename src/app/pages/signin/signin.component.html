@@ -1,57 +1,64 @@
 <div class="login__background">
-  <section class="login" >
-    <figure>
-      <img class="login__img" src="./../../../../assets/images/logo-dateca-background-white.jpg" alt="Logo da empresa e seu nome" />
-    </figure>
-    <div class="login__block"></div>
-    <form class="form mt-4" (ngSubmit)="logIn()" #loginForm="ngForm">
-      <h2 class="text-secondary">
-        Faça o seu login
-      </h2>
-      <div class="form-group">
+  <button
+    type="button"
+    class="login__theme-toggle"
+    (click)="toggleTheme()"
+    [attr.aria-label]="isDarkMode() === 'dark' ? 'Mudar para o tema claro' : 'Mudar para o tema escuro'"
+    [title]="isDarkMode() === 'dark' ? 'Tema claro' : 'Tema escuro'">
+    <i class="bi" [class.bi-sun-fill]="isDarkMode() === 'dark'" [class.bi-moon-stars-fill]="isDarkMode() === 'light'"></i>
+  </button>
+
+  <section class="login">
+    <aside class="login__brand">
+      <img class="login__img" src="assets/images/logo-dateca-background-white.jpg" alt="Logo da Dateca" />
+    </aside>
+
+    <form class="login__form" (ngSubmit)="logIn()" #loginForm="ngForm">
+      <h1 class="login__title">Faça o seu login</h1>
+      <p class="login__subtitle">Acesse o painel administrativo da Dateca.</p>
+
+      <div class="login__field">
         <label class="login-label" for="login">Login</label>
         <input
-          class="form-control login-input"
+          id="login"
+          class="form-item"
           placeholder="Login do usuário"
           [(ngModel)]="login"
           name="login"
           #campoUsuario="ngModel"
+          [class.input-invalido]="campoUsuario.invalid && campoUsuario.touched"
           required
           />
-          @if (campoUsuario.invalid && campoUsuario.touched) {
-            <app-message
-              mensagem="Usuário obrigatório"
-            ></app-message>
-          }
-        </div>
+        @if (campoUsuario.invalid && campoUsuario.touched) {
+          <app-message mensagem="Usuário obrigatório"></app-message>
+        }
+      </div>
 
-        <div class="form-group">
-          <label class="login-label" for="password">Senha</label>
-          <input
-            type="password"
-            class="form-control login-input"
-            placeholder="Senha"
-            [(ngModel)]="password"
-            name="password"
-            #campoSenha="ngModel"
-            required
-            />
-            @if (campoSenha.invalid && campoSenha.touched) {
-              <app-message
-                mensagem="Senha obrigatória"
-              ></app-message>
-            }
-          </div>
+      <div class="login__field">
+        <label class="login-label" for="password">Senha</label>
+        <input
+          id="password"
+          type="password"
+          class="form-item"
+          placeholder="Senha"
+          [(ngModel)]="password"
+          name="password"
+          #campoSenha="ngModel"
+          [class.input-invalido]="campoSenha.invalid && campoSenha.touched"
+          required
+          />
+        @if (campoSenha.invalid && campoSenha.touched) {
+          <app-message mensagem="Senha obrigatória"></app-message>
+        }
+      </div>
 
-          <button
-            type="submit"
-            class="btn btn-primary btn-block login-button"
-            [disabled]="loginForm.invalid"
-            >
-            Entrar
-          </button>
-        </form>
-      </section>
-    </div>
-
-
+      <button
+        type="submit"
+        class="button-adicionar login-button"
+        [ngClass]="{ 'botao-desabilitado': loginForm.invalid }"
+        [disabled]="loginForm.invalid">
+        Entrar
+      </button>
+    </form>
+  </section>
+</div>

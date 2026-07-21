@@ -1,22 +1,30 @@
-<header class="navbar default-layout-navbar p-0 fixed-top d-flex flex-row">
-  <button class="navbar-toggler align-self-center" type="button" (click)="toggleSidebar()">
-    <i class="bi bi-list text-white"></i>
+<header class="navbar default-layout-navbar p-0 fixed-top d-flex flex-row"
+  [ngClass]="{ 'navbar--sidebar-expanded': sidebarExpanded, 'navbar--sidebar-collapsed': !sidebarExpanded }">
+  <button class="navbar__icon-button navbar__sidebar-toggle" type="button" (click)="toggleSidebar()"
+    aria-label="Alternar menu lateral">
+    <i class="bi bi-list"></i>
   </button>
-  <div class="navbar__toggle">
-    <mat-slide-toggle
-      class="navbar__toggle-input"
-      [checked]="isDarkMode"
-      (change)="onSlideToggleChange($event)">
-      Dark mode
-    </mat-slide-toggle>
+
+  <div class="navbar__actions">
+    <button
+      type="button"
+      class="navbar__icon-button navbar__theme-toggle"
+      (click)="toggleTheme()"
+      [attr.aria-pressed]="isDarkMode() === 'dark'"
+      [attr.aria-label]="isDarkMode() === 'dark' ? 'Mudar para o tema claro' : 'Mudar para o tema escuro'"
+      [title]="isDarkMode() === 'dark' ? 'Tema claro' : 'Tema escuro'">
+      <i class="bi" [class.bi-sun-fill]="isDarkMode() === 'dark'" [class.bi-moon-stars-fill]="isDarkMode() === 'light'"></i>
+    </button>
+
     <nav class="navbar__navegacao">
       @if (user$ | async; as user) {
         <div class="dropdown">
-          <div class="dropdown-toggle navbar__navegacao-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="navbar__profile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-circle"></i>
-            <p >{{getFirstName($safeNavigationMigration(professor?.name))}}</p>
-          </div>
-          <ul class="dropdown-menu dropdown-menu-dark">
+            <span class="navbar__profile-name">{{ getFirstName(professor?.name) }}</span>
+            <i class="bi bi-chevron-down navbar__profile-caret"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
             <li class="navbar-list__item">
               <a class="dropdown-item" routerLink="/admin/perfil">
                 <span class="navbar-list__icon">
@@ -27,7 +35,7 @@
             </li>
             <li><hr class="dropdown-divider"></li>
             <li class="navbar-list__item">
-              <a class="dropdown-item text-danger" (click)="logout()">
+              <a class="dropdown-item navbar-list__item--danger" (click)="logout()">
                 <span class="navbar-list__icon">
                   <i class="bi bi-box-arrow-right"></i>
                 </span>

@@ -1,19 +1,16 @@
-.question {
-  height: calc(100vh - 170px);
-  margin: 20px;
-}
-
-i {
+.question i {
   cursor: pointer;
 }
 
+// Mantém o enunciado em uma linha na listagem.
 .question__statement {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  overflow: hidden;
   -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 
 .question__acoes {
   display: flex;
+  gap: 0.25rem;
 }

@@ -1,9 +1,11 @@
-<mat-card class="dashboard-card">
-  <mat-card-header>
-    <h2>{{ title }}</h2>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{ conteudo }}</p>
-    <i class="{{ icon }}"></i>
+<mat-card class="dashboard-card" [ngClass]="'dashboard-card--' + accent">
+  <mat-card-content class="dashboard-card__content">
+    <div class="dashboard-card__text">
+      <p class="dashboard-card__title">{{ title }}</p>
+      <p class="dashboard-card__value">{{ conteudo }}</p>
+    </div>
+    <span class="dashboard-card__icon">
+      <i class="{{ icon }}"></i>
+    </span>
   </mat-card-content>
 </mat-card>

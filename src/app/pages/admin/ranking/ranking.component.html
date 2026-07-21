@@ -1,24 +1,73 @@
-<mat-card class="col-12">
-  <mat-card-header>
-    <h2><b>Ranking Geral</b></h2>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-list role="list">
-      @for (student of rankingStudents; track student; let i = $index) {
-        <mat-list-item role="listitem">
-          <div class="dashboard__list">
-            <div class="col-2">
-              #{{ i + 1 }} <!-- Índice do Angular é 0-based, mas você quer começar em 1 -->
+<div class="ranking">
+  <div class="app-page__toolbar">
+    <div>
+      <h1 class="app-page__title">Ranking Geral</h1>
+      <p class="app-page__subtitle">Alunos ordenados pela pontuação acumulada.</p>
+    </div>
+
+    @if (rows.length) {
+      <span class="ranking__total">
+        <i class="bi bi-people-fill" aria-hidden="true"></i>
+        {{ rows.length }} {{ rows.length === 1 ? 'participante' : 'participantes' }}
+      </span>
+    }
+  </div>
+
+  @if (loading) {
+    <div class="ranking__empty app-surface">
+      <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+      <p>Carregando o ranking…</p>
+    </div>
+  } @else if (!rows.length) {
+    <div class="ranking__empty app-surface">
+      <i class="bi bi-trophy" aria-hidden="true"></i>
+      <p>Nenhum aluno pontuou ainda.</p>
+      <span>O ranking aparece assim que as primeiras respostas forem registradas.</span>
+    </div>
+  } @else {
+    @if (podium.length >= 2) {
+      <section class="podium app-surface" aria-label="Primeiros colocados">
+        @for (row of podium; track row.position) {
+          <article class="podium__place" [class]="'podium__place--' + row.position">
+            <div class="podium__avatar" [attr.data-accent]="row.accent">
+              {{ row.initials }}
+              @if (row.position === 1) {
+                <i class="bi bi-trophy-fill podium__trophy" aria-hidden="true"></i>
+              }
             </div>
-            <div class="col-8">
-              {{ student.student.name }} <!-- Substitua 'name' pelo atributo apropriado do estudante -->
+            <p class="podium__name" [title]="row.name">{{ row.name }}</p>
+            <p class="podium__points">{{ row.points }} pts</p>
+            <div class="podium__step">
+              <span class="podium__step-number">{{ row.position }}º</span>
             </div>
-            <div class="col-2">
-              {{ student.student.points }} <!-- Substitua 'points' pelo atributo apropriado do estudante -->
-            </div>
-          </div>
-        </mat-list-item>
-      }
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+          </article>
+        }
+      </section>
+    }
+
+    <section class="ranking__list app-surface">
+      <header class="ranking__list-header">
+        <h2 class="ranking__list-title">Classificação completa</h2>
+        <span class="ranking__list-hint">Pontuação acumulada</span>
+      </header>
+
+      <ol class="ranking__rows">
+        @for (row of rows; track row.position) {
+          <li class="ranking__row" [class.ranking__row--top]="row.position <= 3">
+            <span class="ranking__place" [attr.data-place]="row.position <= 3 ? row.position : null">
+              @if (row.position <= 3) {
+                <i class="bi bi-award-fill" aria-hidden="true"></i>
+                <span class="visually-hidden">{{ row.position }}º lugar</span>
+              } @else {
+                {{ row.position }}
+              }
+            </span>
+            <span class="ranking__avatar" [attr.data-accent]="row.accent" aria-hidden="true">{{ row.initials }}</span>
+            <span class="ranking__name" [title]="row.name">{{ row.name }}</span>
+            <span class="ranking__points">{{ row.points }}<small>pts</small></span>
+          </li>
+        }
+      </ol>
+    </section>
+  }
+</div>

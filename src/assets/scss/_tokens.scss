@@ -1,0 +1,157 @@
+/* ============================================================================
+   Design tokens — tema claro (padrão) e tema escuro.
+
+   O tema ativo é definido pelo atributo `data-bs-theme` no <html> (ver
+   ThemeService). Esse mesmo atributo:
+     1. alterna os componentes do Bootstrap 5.3 (color modes nativos);
+     2. define `color-scheme: dark`, o que faz os componentes do Angular
+        Material M3 trocarem de tema sozinhos, porque `mat.theme()` emite
+        seus valores com a função CSS `light-dark()`.
+
+   Ou seja: basta trocar um atributo para os três sistemas (Bootstrap,
+   Material e o CSS próprio do app) acompanharem.
+   ============================================================================ */
+
+@mixin light-tokens {
+  color-scheme: light;
+
+  ////////// MARCA //////////
+  --app-brand: #1f6feb;
+  --app-brand-strong: #1a5fd0;
+  --app-brand-contrast: #ffffff;
+  --app-brand-soft: rgba(31, 111, 235, 0.1);
+
+  ////////// SUPERFÍCIES //////////
+  --app-bg: #eef2f7;
+  --app-bg-rgb: 238, 242, 247;
+  --app-surface: #ffffff;
+  --app-surface-2: #f6f8fc;
+  --app-surface-hover: #eaeff7;
+  --app-navbar-bg: rgba(255, 255, 255, 0.88);
+  --app-sidebar-bg: #ffffff;
+
+  ////////// TEXTO //////////
+  --app-text: #111827;
+  --app-text-rgb: 17, 24, 39;
+  --app-text-muted: #5a6675;
+  --app-text-subtle: #8894a5;
+
+  ////////// TRAÇOS //////////
+  --app-border: #e1e6ef;
+  --app-border-strong: #ccd4e0;
+
+  ////////// ESTADOS //////////
+  --app-success: #12805c;
+  --app-danger: #d13438;
+  --app-warning: #b26a00;
+  --app-info: #0f6fa8;
+
+  ////////// ACENTOS (ícones de navegação e cards) //////////
+  --app-accent-red: #c0504d;
+  --app-accent-blue: #3f72d7;
+  --app-accent-amber: #b8860b;
+  --app-accent-violet: #5f5bb0;
+  --app-accent-green: #2f8f63;
+  --app-accent-teal: #2f8f89;
+  --app-accent-gold: #a97c1f;
+
+  ////////// ELEVAÇÃO //////////
+  --app-shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+  --app-shadow-md: 0 4px 14px rgba(16, 24, 40, 0.08);
+  --app-shadow-lg: 0 16px 40px rgba(16, 24, 40, 0.14);
+  --app-ring: 0 0 0 3px rgba(31, 111, 235, 0.22);
+}
+
+@mixin dark-tokens {
+  color-scheme: dark;
+
+  ////////// MARCA //////////
+  --app-brand: #4d94ff;
+  --app-brand-strong: #6ba7ff;
+  --app-brand-contrast: #08192e;
+  --app-brand-soft: rgba(77, 148, 255, 0.14);
+
+  ////////// SUPERFÍCIES //////////
+  --app-bg: #0d1117;
+  --app-bg-rgb: 13, 17, 23;
+  --app-surface: #161b23;
+  --app-surface-2: #1c222c;
+  --app-surface-hover: #232b37;
+  --app-navbar-bg: rgba(22, 27, 35, 0.88);
+  --app-sidebar-bg: #12171e;
+
+  ////////// TEXTO //////////
+  --app-text: #e6edf5;
+  --app-text-rgb: 230, 237, 245;
+  --app-text-muted: #9aa7b8;
+  --app-text-subtle: #74829a;
+
+  ////////// TRAÇOS //////////
+  --app-border: #2a323e;
+  --app-border-strong: #3b4553;
+
+  ////////// ESTADOS //////////
+  --app-success: #45c08a;
+  --app-danger: #ff7b72;
+  --app-warning: #ffb547;
+  --app-info: #58c4ec;
+
+  ////////// ACENTOS //////////
+  --app-accent-red: #e58a87;
+  --app-accent-blue: #7aa7ff;
+  --app-accent-amber: #f2c55c;
+  --app-accent-violet: #9d98ee;
+  --app-accent-green: #6ad3a1;
+  --app-accent-teal: #5fcfc6;
+  --app-accent-gold: #ebbe3f;
+
+  ////////// ELEVAÇÃO //////////
+  --app-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --app-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.45);
+  --app-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
+  --app-ring: 0 0 0 3px rgba(77, 148, 255, 0.3);
+}
+
+:root {
+  @include light-tokens;
+
+  ////////// FORMA E MOVIMENTO //////////
+  --app-radius-sm: 8px;
+  --app-radius: 12px;
+  --app-radius-lg: 18px;
+  --app-radius-pill: 999px;
+  --app-transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  ////////// LAYOUT //////////
+  --app-navbar-height: 70px;
+  --app-sidebar-width: 232px;
+  --app-sidebar-width-collapsed: 72px;
+
+  ////////// PONTES PARA O BOOTSTRAP //////////
+  // Reescreve as variáveis que o Bootstrap 5.3 consome em runtime, para que
+  // cards, dropdowns, tabelas e formulários usem a mesma paleta do app.
+  --bs-body-bg: var(--app-bg);
+  --bs-body-bg-rgb: var(--app-bg-rgb);
+  --bs-body-color: var(--app-text);
+  --bs-body-color-rgb: var(--app-text-rgb);
+  --bs-emphasis-color: var(--app-text);
+  --bs-emphasis-color-rgb: var(--app-text-rgb);
+  --bs-secondary-color: var(--app-text-muted);
+  --bs-secondary-bg: var(--app-surface-2);
+  --bs-tertiary-bg: var(--app-surface-hover);
+  --bs-border-color: var(--app-border);
+  --bs-border-radius: var(--app-radius-sm);
+  --bs-link-color: var(--app-brand);
+  --bs-link-hover-color: var(--app-brand-strong);
+}
+
+[data-bs-theme='dark'] {
+  @include dark-tokens;
+}
+
+// Antes do ThemeService gravar a escolha do usuário, segue a preferência do SO.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-bs-theme]) {
+    @include dark-tokens;
+  }
+}

@@ -1,0 +1,38 @@
+/* ============================================================================
+   Ponte entre os tokens do app e o sistema de tokens do Angular Material M3.
+
+   `mat.theme()` gera as variáveis `--mat-sys-*` já com `light-dark()`, então
+   elas trocam sozinhas conforme o `color-scheme`. O que fazemos aqui é
+   apontá-las para os tokens do app, para que um mat-card e um card do
+   Bootstrap tenham exatamente a mesma superfície nos dois temas.
+
+   Está num mixin (e não solto no `:root`) porque a feature de importação usa
+   um tema Material próprio e escopado — ela reaplica as superfícies sem
+   herdar a cor de marca. Ver `pages/admin/importacao/_importacao-theme.scss`.
+   ============================================================================ */
+
+/// Superfícies, texto e contornos — o que precisa ser igual em todo o app.
+@mixin app-material-surfaces {
+  --mat-sys-background: var(--app-bg);
+  --mat-sys-on-background: var(--app-text);
+  --mat-sys-surface: var(--app-surface);
+  --mat-sys-surface-container-lowest: var(--app-surface);
+  --mat-sys-surface-container-low: var(--app-surface-2);
+  --mat-sys-surface-container: var(--app-surface);
+  --mat-sys-surface-container-high: var(--app-surface-hover);
+  --mat-sys-surface-container-highest: var(--app-surface-hover);
+  --mat-sys-surface-variant: var(--app-surface-2);
+  --mat-sys-on-surface: var(--app-text);
+  --mat-sys-on-surface-variant: var(--app-text-muted);
+  --mat-sys-outline: var(--app-border-strong);
+  --mat-sys-outline-variant: var(--app-border);
+  --mat-sys-error: var(--app-danger);
+}
+
+/// Cor de marca — aplicada apenas no tema global.
+@mixin app-material-brand {
+  --mat-sys-primary: var(--app-brand);
+  --mat-sys-on-primary: var(--app-brand-contrast);
+  --mat-sys-primary-container: var(--app-brand-soft);
+  --mat-sys-on-primary-container: var(--app-text);
+}

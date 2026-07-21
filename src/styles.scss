@@ -1,29 +1,98 @@
-@import "node_modules/ngx-toastr/toastr.css";
+@use '@angular/material' as mat;
+
+@import 'node_modules/ngx-toastr/toastr.css';
 @import 'bootstrap/scss/bootstrap.scss';
 @import 'bootstrap-icons/font/bootstrap-icons.scss';
+
 @import './assets/scss/variables';
-
+@import './assets/scss/tokens';
+@import './assets/scss/material-bridge';
+@import './assets/scss/reset';
 @import './assets/scss/misc';
+@import './assets/scss/components';
 
-.dark-mode {
-  background: #000000;
-}
+// Tema Material escopado da feature de importação. Vive aqui, e não nos
+// componentes da feature, porque `mat.theme()` gera ~9 kB de tokens: incluído
+// em cada componente-raiz ele duplicava esse bloco e estourava o budget
+// `anyComponentStyle`. Como escopo de tema é um seletor global, o lugar certo
+// é o bundle global.
+@import './app/pages/admin/importacao/importacao-theme';
+@include importacao-m3-scope;
 
-.toast-center {
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+// Tema Material 3 global. Sem `theme-type`, `mat.theme()` assume `color-scheme`
+// e emite os tokens com `light-dark()` — por isso os componentes do Material
+// seguem o `color-scheme` que o `data-bs-theme` define em `_tokens.scss`, sem
+// precisar de dois temas compilados.
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+
+  @include app-material-surfaces;
+  @include app-material-brand;
 }
 
 body {
   padding: 0;
   margin: 0;
   overflow-x: hidden;
-  font-size: .875rem;
-  font-family: 'Roboto', sans-serif;
-  background: #56585d;
-  color: #ffffff;
+
+  font-family: $font-family-base;
+  font-size: $default-font-size;
+  line-height: 1.5;
+
+  background: var(--app-bg);
+  color: var(--app-text);
+  transition:
+    background-color var(--app-transition),
+    color var(--app-transition);
 }
+
+::selection {
+  background: var(--app-brand);
+  color: var(--app-brand-contrast);
+}
+
+/* ---------------------------------------------------------------------------
+   Barras de rolagem — o padrão do Chrome fica claro demais no tema escuro.
+   --------------------------------------------------------------------------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--app-border-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--app-border-strong);
+  border-radius: var(--app-radius-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+
+  &:hover {
+    background: var(--app-text-subtle);
+    background-clip: padding-box;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Tipografia
+   --------------------------------------------------------------------------- */
 
 h1,
 h2,
@@ -31,42 +100,56 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 500;
-  line-height: 1;
+  color: var(--app-text);
+  font-weight: $font-weight-medium;
+  line-height: 1.2;
 }
 
 p {
-  font-size: .875rem;
-  margin-bottom: .5rem;
-  line-height: 1.3rem;
+  font-size: $default-font-size;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
 }
 
 h1 {
-  font-size: 3.125rem;
-}
-
-h2 {
   font-size: 2.5rem;
 }
 
-@media(max-width: 767px) {
-  h2 {
-    font-size: 1.9rem;
-  }
-}
-
-h3 {
+h2 {
   font-size: 1.875rem;
 }
 
+h3 {
+  font-size: 1.5rem;
+}
+
 h4 {
-  font-size: 1.45rem;
+  font-size: 1.25rem;
 }
 
 h5 {
-  font-size: 1rem;
+  font-size: 1.0625rem;
 }
 
 h6 {
-  font-size: .9375rem;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+a {
+  color: var(--app-brand);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--app-brand-strong);
+  }
 }

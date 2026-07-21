@@ -1,8 +1,14 @@
 
 <div class="professor">
-  <a class="btn btn-primary mb-4 fs-4 text-white" routerLink="adicionar-professor">
-    <i class="bi bi-person-plus-fill"></i>
-  </a>
+  <div class="app-page__toolbar">
+    <div>
+      <h1 class="app-page__title">Professores</h1>
+      <p class="app-page__subtitle">Professores com acesso ao painel administrativo.</p>
+    </div>
+    <a class="btn btn-primary" routerLink="adicionar-professor">
+      <i class="bi bi-person-plus-fill me-2"></i>Novo professor
+    </a>
+  </div>
 
 <div class="mat-elevation-z8">
   <table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
