@@ -78,6 +78,7 @@ describe('ImportacaoRevisaoComponent', () => {
   it('publicar não chama o backend quando o rascunho não está pronto', () => {
     component.removerQuestao(0);
     component.publicar();
+    expect(component.publicando()).toBeFalse();
     httpMock.expectNone(`${API}/importacao/provas/job-1/rascunho`);
   });
 });
