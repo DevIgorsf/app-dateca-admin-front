@@ -1,0 +1,94 @@
+@use '../importacao-theme' as theme;
+@include theme.importacao-m3-scope;
+
+:host {
+  display: block;
+}
+
+.importacao-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.upload-card {
+  max-width: 640px;
+  width: 100%;
+  padding: 2rem;
+}
+
+.subtitulo {
+  color: var(--mat-sys-on-surface-variant, #49454f);
+  margin-bottom: 1.5rem;
+}
+
+.dropzone {
+  border: 2px dashed var(--mat-sys-outline, #79747e);
+  border-radius: 16px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+
+  mat-icon {
+    font-size: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--mat-sys-primary, #6750a4);
+  }
+}
+
+.dropzone--ativo {
+  background-color: var(--mat-sys-primary-container, #eaddff);
+  border-color: var(--mat-sys-primary, #6750a4);
+}
+
+.selecionar-arquivo {
+  color: var(--mat-sys-primary, #6750a4);
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.progresso-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.progresso-texto {
+  font-size: 0.875rem;
+  color: var(--mat-sys-on-surface-variant, #49454f);
+}
+
+.skeleton-linha {
+  height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(90deg, #e8e0ea 25%, #f5f0f7 37%, #e8e0ea 63%);
+  background-size: 400% 100%;
+  animation: importacao-skeleton 1.4s ease infinite;
+}
+
+.skeleton-linha--curta {
+  width: 60%;
+}
+
+@keyframes importacao-skeleton {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+.erro-bloco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .skeleton-linha {
+    background: linear-gradient(90deg, #322f35 25%, #48454b 37%, #322f35 63%);
+    background-size: 400% 100%;
+  }
+}

@@ -64,5 +64,15 @@
         </span>
       </a>
     </li>
+    <li class="sidebar-item" [ngClass]="{ 'active': importacao.isActive }">
+      <a class="sidebar-link" routerLink="/admin/importacao" routerLinkActive #importacao="routerLinkActive">
+        <span class="sidebar-item__icon" style="color: #4fb0a5;">
+          <i class="bi bi-file-earmark-arrow-up"></i>
+        </span>
+        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
+          Importar Prova
+        </span>
+      </a>
+    </li>
   </ul>
 </nav>

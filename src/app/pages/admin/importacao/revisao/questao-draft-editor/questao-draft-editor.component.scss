@@ -1,0 +1,96 @@
+:host {
+  display: block;
+}
+
+.questao-card {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid transparent;
+}
+
+.questao-card--revisao {
+  border-left-color: var(--mat-sys-error, #b3261e);
+}
+
+.questao-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+
+  .questao-numero {
+    font-weight: 600;
+  }
+
+  .questao-pagina {
+    color: var(--mat-sys-on-surface-variant, #49454f);
+    font-size: 0.8rem;
+  }
+
+  button {
+    margin-left: auto;
+  }
+}
+
+.chip-revisao {
+  background-color: var(--mat-sys-error-container, #f9dedc);
+  color: var(--mat-sys-on-error-container, #410e0b);
+
+  mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+  }
+}
+
+.campo-largo {
+  width: 100%;
+}
+
+.questao-imagens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1rem;
+
+  img {
+    max-width: 220px;
+    max-height: 220px;
+    border-radius: 8px;
+    object-fit: contain;
+    border: 1px solid var(--mat-sys-outline-variant, #cac4d0);
+  }
+}
+
+.alternativas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.alternativa-linha {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+
+  .campo-letra {
+    width: 80px;
+  }
+
+  .campo-texto {
+    flex: 1;
+  }
+}
+
+.questao-rodape {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+
+  .campo-gabarito {
+    width: 160px;
+  }
+}

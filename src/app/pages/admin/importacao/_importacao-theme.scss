@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+
+// Tema Material 3 dedicado à ilha "Importação Inteligente de Provas". O restante do
+// admin-front hoje usa Material 2 + Bootstrap (ver src/styles.scss); em vez de trocar o tema
+// global (o que quebraria as telas existentes), este mixin gera as variáveis M3 escopadas pela
+// classe .importacao-m3-scope. Como variáveis CSS custom herdam normalmente pela árvore do DOM
+// (a encapsulação de estilos do Angular não bloqueia herança de custom properties), basta
+// incluir este mixin uma vez no componente raiz de cada rota da feature — os componentes
+// filhos (ex.: o editor de questão) herdam o mesmo tema automaticamente.
+@mixin importacao-m3-scope {
+  .importacao-m3-scope {
+    @include mat.theme((
+      color: mat.$violet-palette,
+      typography: Roboto,
+      density: 0,
+    ));
+  }
+}

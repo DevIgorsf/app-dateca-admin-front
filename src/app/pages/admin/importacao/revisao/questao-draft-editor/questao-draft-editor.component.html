@@ -1,0 +1,71 @@
+<mat-card class="questao-card" [class.questao-card--revisao]="questionGroup.get('needsReview')?.value" [formGroup]="questionGroup">
+  <div class="questao-cabecalho">
+    <span class="questao-numero">Questão {{ questionGroup.get('number')?.value ?? (indice + 1) }}</span>
+
+    @if (questionGroup.get('needsReview')?.value) {
+      <mat-chip class="chip-revisao">
+        <mat-icon>flag</mat-icon>
+        Revisar
+      </mat-chip>
+    }
+
+    @if (questionGroup.get('sourcePageNumber')?.value) {
+      <span class="questao-pagina">Página {{ questionGroup.get('sourcePageNumber')?.value }}</span>
+    }
+
+    <button mat-icon-button type="button" (click)="removerQuestao()" aria-label="Remover questão">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </div>
+
+  <mat-form-field appearance="outline" class="campo-largo">
+    <mat-label>Enunciado</mat-label>
+    <textarea matInput formControlName="statement" rows="4"></textarea>
+  </mat-form-field>
+
+  @if (imagensCarregadas().length > 0) {
+    <div class="questao-imagens">
+      @for (imagem of imagensCarregadas(); track imagem.id) {
+        <img [src]="imagem.url" alt="Figura da questão">
+      }
+    </div>
+  }
+
+  <div class="alternativas" formArrayName="alternatives">
+    @for (alternativa of alternativeGroups; track alternativa; let i = $index) {
+      <div class="alternativa-linha" [formGroupName]="i">
+        <mat-form-field appearance="outline" class="campo-letra">
+          <mat-label>Letra</mat-label>
+          <input matInput formControlName="label" maxlength="1">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="campo-texto">
+          <mat-label>Texto da alternativa</mat-label>
+          <input matInput formControlName="text">
+        </mat-form-field>
+        <button mat-icon-button type="button" (click)="removerAlternativa(i)" aria-label="Remover alternativa">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    }
+  </div>
+
+  <button mat-stroked-button type="button" (click)="adicionarAlternativa()">
+    <mat-icon>add</mat-icon>
+    Adicionar alternativa
+  </button>
+
+  <div class="questao-rodape">
+    <mat-checkbox formControlName="annulled">Questão anulada (sem gabarito)</mat-checkbox>
+
+    @if (!questionGroup.get('annulled')?.value) {
+      <mat-form-field appearance="outline" class="campo-gabarito">
+        <mat-label>Alternativa correta</mat-label>
+        <mat-select formControlName="correctAlternativeLabel">
+          @for (alternativa of alternativeGroups; track alternativa) {
+            <mat-option [value]="alternativa.get('label')?.value">{{ alternativa.get('label')?.value }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+  </div>
+</mat-card>

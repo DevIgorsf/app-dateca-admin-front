@@ -1,0 +1,82 @@
+@use '../importacao-theme' as theme;
+@include theme.importacao-m3-scope;
+
+:host {
+  display: block;
+}
+
+.revisao-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem 6rem;
+}
+
+.metadata-card {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.erro-mensagem {
+  color: var(--mat-sys-error, #b3261e);
+  font-weight: 500;
+}
+
+.questoes-lista {
+  display: flex;
+  flex-direction: column;
+}
+
+.acoes-rodape {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 0;
+  background: var(--mat-sys-surface, #fffbfe);
+}
+
+.confirmacao-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+
+  mat-icon {
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.skeleton-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.skeleton-linha {
+  height: 20px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #e8e0ea 25%, #f5f0f7 37%, #e8e0ea 63%);
+  background-size: 400% 100%;
+  animation: importacao-skeleton 1.4s ease infinite;
+}
+
+.skeleton-linha--curta {
+  width: 50%;
+}
+
+@keyframes importacao-skeleton {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
