@@ -63,6 +63,16 @@
         </span>
       </a>
     </li>
+    <li class="sidebar-item sidebar-item--pink" [ngClass]="{ 'active': prova.isActive }">
+      <a class="sidebar-link" routerLink="/admin/prova" routerLinkActive #prova="routerLinkActive">
+        <span class="sidebar-item__icon">
+          <i class="bi bi-file-earmark-text-fill"></i>
+        </span>
+        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
+          Provas
+        </span>
+      </a>
+    </li>
     <li class="sidebar-item sidebar-item--gold" [ngClass]="{ 'active': ranking.isActive }">
       <a class="sidebar-link" routerLink="/admin/ranking" routerLinkActive #ranking="routerLinkActive">
         <span class="sidebar-item__icon">

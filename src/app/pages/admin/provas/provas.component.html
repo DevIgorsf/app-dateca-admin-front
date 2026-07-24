@@ -1,0 +1,95 @@
+
+<div class="provas">
+  <div class="app-page__toolbar">
+    <div>
+      <h1 class="app-page__title">Provas</h1>
+      <p class="app-page__subtitle">Todas as provas registradas na plataforma pelos alunos.</p>
+    </div>
+    <div class="provas__search">
+      <i class="bi bi-search"></i>
+      <input
+        type="text"
+        class="provas__search-input"
+        placeholder="Buscar por título, disciplina, criador..."
+        (keyup)="aplicarFiltro($event)">
+    </div>
+  </div>
+
+<div class="mat-elevation-z8">
+  <table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+    <ng-container matColumnDef="titulo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Título </th>
+      <td mat-cell *matCellDef="let element">
+        <a class="provas__titulo" [routerLink]="[element.id]">{{ element.titulo }}</a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="disciplina">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Disciplina </th>
+      <td mat-cell *matCellDef="let element"> {{ element.disciplina }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dificuldade">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Dificuldade </th>
+      <td mat-cell *matCellDef="let element"> {{ element.dificuldade }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let element">
+        <span class="status-badge" [ngClass]="statusClass(element.status)">{{ element.status }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="visibilidade">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Visibilidade </th>
+      <td mat-cell *matCellDef="let element"> {{ visibilidadeLabel(element.visibilidade) }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="participantes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Participantes </th>
+      <td mat-cell *matCellDef="let element"> {{ element.participantes }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalQuestoes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Questões </th>
+      <td mat-cell *matCellDef="let element"> {{ element.totalQuestoes }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="criadorNome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Criador </th>
+      <td mat-cell *matCellDef="let element"> {{ element.criadorNome }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="criadaEm">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Criada em </th>
+      <td mat-cell *matCellDef="let element"> {{ element.criadaEm | date:'dd/MM/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <a [routerLink]="[element.id]" aria-label="Visualizar prova" title="Visualizar">
+          <i class="bi bi-eye-fill text-primary mx-2"></i>
+        </a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="provas__empty" [attr.colspan]="displayedColumns.length">
+        Nenhuma prova registrada na plataforma.
+      </td>
+    </tr>
+  </table>
+  <mat-paginator
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    showFirstLastButtons
+    aria-label="Selecionar página de provas">
+  </mat-paginator>
+</div>
+</div>

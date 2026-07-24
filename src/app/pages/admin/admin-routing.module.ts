@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfessorsComponent } from './professors/professors.component';
 import { StudentsComponent } from './students/students.component';
+import { ProvasComponent } from './provas/provas.component';
+import { ProvaDetalheComponent } from './provas/prova-detalhe/prova-detalhe.component';
 
 import { CourseComponent } from './course/course.component';
 import { CreateProfessorComponent } from './professors/create-professor/create-professor.component';
@@ -46,6 +48,14 @@ const routes: Routes = [
       {
         path: 'aluno',
         component: StudentsComponent,
+      },
+      {
+        path: 'prova',
+        component: ProvasComponent,
+      },
+      {
+        path: 'prova/:id',
+        component: ProvaDetalheComponent,
       },
       {
         path: 'materia',

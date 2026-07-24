@@ -1,0 +1,112 @@
+
+<div class="prova-detalhe">
+  <a class="prova-detalhe__voltar" routerLink="/admin/prova">
+    <i class="bi bi-arrow-left"></i> Voltar para provas
+  </a>
+
+  @if (carregando) {
+    <div class="prova-detalhe__estado">
+      <i class="bi bi-arrow-repeat"></i>
+      <span>Carregando prova...</span>
+    </div>
+  }
+
+  @if (erro && !carregando) {
+    <div class="prova-detalhe__estado">
+      <i class="bi bi-exclamation-triangle"></i>
+      <span>Prova não encontrada.</span>
+    </div>
+  }
+
+  @if (prova && !carregando) {
+    <div class="app-page__toolbar">
+      <div>
+        <h1 class="app-page__title">{{ prova.titulo }}</h1>
+        <p class="app-page__subtitle">{{ prova.disciplina }}</p>
+      </div>
+      <span class="status-badge" [ngClass]="statusClass(prova.status)">{{ prova.status }}</span>
+    </div>
+
+    <div class="app-surface prova-detalhe__info">
+      <div class="prova-detalhe__campo">
+        <span class="prova-detalhe__label">Criador</span>
+        <span class="prova-detalhe__valor">{{ prova.criadorNome }}</span>
+      </div>
+      <div class="prova-detalhe__campo">
+        <span class="prova-detalhe__label">Dificuldade</span>
+        <span class="prova-detalhe__valor">{{ prova.dificuldade }}</span>
+      </div>
+      <div class="prova-detalhe__campo">
+        <span class="prova-detalhe__label">Visibilidade</span>
+        <span class="prova-detalhe__valor">{{ visibilidadeLabel(prova.visibilidade) }}</span>
+      </div>
+      <div class="prova-detalhe__campo">
+        <span class="prova-detalhe__label">Participantes</span>
+        <span class="prova-detalhe__valor">{{ prova.participantes }}</span>
+      </div>
+      <div class="prova-detalhe__campo">
+        <span class="prova-detalhe__label">Questões</span>
+        <span class="prova-detalhe__valor">{{ prova.questoes.length }}</span>
+      </div>
+      <div class="prova-detalhe__campo">
+        <span class="prova-detalhe__label">Máx. participantes</span>
+        <span class="prova-detalhe__valor">{{ prova.maxParticipantes ?? '—' }}</span>
+      </div>
+      <div class="prova-detalhe__campo">
+        <span class="prova-detalhe__label">Abertura</span>
+        <span class="prova-detalhe__valor">
+          {{ prova.dataAbertura ? (prova.dataAbertura | date:'dd/MM/yyyy') : '—' }}
+          {{ prova.horaAbertura ? prova.horaAbertura : '' }}
+        </span>
+      </div>
+      <div class="prova-detalhe__campo">
+        <span class="prova-detalhe__label">Encerramento</span>
+        <span class="prova-detalhe__valor">{{ prova.dataEncerramento ? (prova.dataEncerramento | date:'dd/MM/yyyy') : '—' }}</span>
+      </div>
+      <div class="prova-detalhe__campo">
+        <span class="prova-detalhe__label">Criada em</span>
+        <span class="prova-detalhe__valor">{{ prova.criadaEm | date:'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+    </div>
+
+    @if (prova.descricao) {
+      <div class="prova-detalhe__descricao">
+        <h2 class="prova-detalhe__secao-titulo">Descrição</h2>
+        <p>{{ prova.descricao }}</p>
+      </div>
+    }
+
+    <h2 class="prova-detalhe__secao-titulo">Questões ({{ prova.questoes.length }})</h2>
+
+    @if (prova.questoes.length === 0) {
+      <p class="prova-detalhe__vazio">Esta prova ainda não possui questões.</p>
+    }
+
+    @for (questao of prova.questoes; track questao.id; let i = $index) {
+      <div class="app-surface questao">
+        <div class="questao__enunciado">
+          <span class="questao__numero">{{ i + 1 }}</span>
+          <p>{{ questao.statement }}</p>
+        </div>
+
+        <ul class="questao__alternativas">
+          @for (alt of alternativas(questao); track alt.letra) {
+            <li class="questao__alternativa" [class.questao__alternativa--correta]="ehCorreta(questao, alt.letra)">
+              <span class="questao__letra">{{ alt.letra }}</span>
+              <span class="questao__texto">{{ alt.texto }}</span>
+              @if (ehCorreta(questao, alt.letra)) {
+                <i class="bi bi-check-circle-fill questao__check"></i>
+              }
+            </li>
+          }
+        </ul>
+
+        @if (questao.comment) {
+          <div class="questao__comentario">
+            <strong>Comentário:</strong> {{ questao.comment }}
+          </div>
+        }
+      </div>
+    }
+  }
+</div>
