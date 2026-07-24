@@ -4,21 +4,21 @@
     <i class="bi bi-arrow-left"></i> Voltar para provas
   </a>
 
-  @if (carregando) {
+  @if (carregando()) {
     <div class="prova-detalhe__estado">
       <i class="bi bi-arrow-repeat"></i>
       <span>Carregando prova...</span>
     </div>
   }
 
-  @if (erro && !carregando) {
+  @if (erro()) {
     <div class="prova-detalhe__estado">
       <i class="bi bi-exclamation-triangle"></i>
       <span>Prova não encontrada.</span>
     </div>
   }
 
-  @if (prova && !carregando) {
+  @if (prova(); as prova) {
     <div class="app-page__toolbar">
       <div>
         <h1 class="app-page__title">{{ prova.titulo }}</h1>
