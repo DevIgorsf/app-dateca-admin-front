@@ -11,14 +11,6 @@
 @import './assets/scss/misc';
 @import './assets/scss/components';
 
-// Tema Material escopado da feature de importação. Vive aqui, e não nos
-// componentes da feature, porque `mat.theme()` gera ~9 kB de tokens: incluído
-// em cada componente-raiz ele duplicava esse bloco e estourava o budget
-// `anyComponentStyle`. Como escopo de tema é um seletor global, o lugar certo
-// é o bundle global.
-@import './app/pages/admin/importacao/importacao-theme';
-@include importacao-m3-scope;
-
 // Tema Material 3 global. Sem `theme-type`, `mat.theme()` assume `color-scheme`
 // e emite os tokens com `light-dark()` — por isso os componentes do Material
 // seguem o `color-scheme` que o `data-bs-theme` define em `_tokens.scss`, sem

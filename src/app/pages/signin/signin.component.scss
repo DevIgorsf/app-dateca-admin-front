@@ -73,9 +73,10 @@
   border-right: 1px solid var(--app-border);
 }
 
-// A logo é um JPG com fundo branco embutido. Em vez de deixá-la como um
-// retângulo branco solto sobre a superfície escura, damos a ela uma "placa"
-// branca com cantos arredondados — assim ela lê como marca nos dois temas.
+// A logo é um JPG com fundo branco embutido. A "placa" branca com cantos
+// arredondados faz ela ler como marca no tema escuro; no claro ela se funde ao
+// card, que é o comportamento desejado. Sem sombra de propósito: no tema claro
+// a sombra desenhava uma moldura em volta de nada.
 .login__img {
   width: 100%;
   max-width: 280px;
@@ -83,7 +84,6 @@
   padding: 0.75rem;
   background: #ffffff;
   border-radius: var(--app-radius);
-  box-shadow: var(--app-shadow-sm);
 }
 
 .login__form {

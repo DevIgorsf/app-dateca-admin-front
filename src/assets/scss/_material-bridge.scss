@@ -6,9 +6,10 @@
    apontá-las para os tokens do app, para que um mat-card e um card do
    Bootstrap tenham exatamente a mesma superfície nos dois temas.
 
-   Está num mixin (e não solto no `:root`) porque a feature de importação usa
-   um tema Material próprio e escopado — ela reaplica as superfícies sem
-   herdar a cor de marca. Ver `pages/admin/importacao/_importacao-theme.scss`.
+   Superfícies e marca estão em mixins separados para permitir um tema escopado
+   que reaproveite as superfícies do app com outra cor de marca. Hoje nenhuma
+   feature usa isso — a de importação já usou, com uma paleta violeta própria,
+   até o roxo destoar do azul do app no tema claro.
    ============================================================================ */
 
 /// Superfícies, texto e contornos — o que precisa ser igual em todo o app.

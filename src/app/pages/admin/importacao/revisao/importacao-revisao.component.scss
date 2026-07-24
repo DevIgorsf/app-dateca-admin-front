@@ -1,5 +1,5 @@
-// O tema `.importacao-m3-scope` é emitido uma vez em `src/styles.scss`; ver o
-// comentário em `../_importacao-theme.scss`.
+// Ver importacao-upload.component.scss: a feature deixou de ter tema Material
+// próprio e usa os mesmos tokens das demais telas.
 
 :host {
   display: block;
@@ -8,12 +8,15 @@
 .revisao-page {
   max-width: 960px;
   margin: 0 auto;
-  padding: 2rem 1rem 6rem;
+  padding: 0.5rem 0 6rem;
 }
 
 .metadata-card {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
 }
 
 .metadata-grid {
@@ -23,7 +26,7 @@
 }
 
 .erro-mensagem {
-  color: var(--mat-sys-error, #b3261e);
+  color: var(--app-danger);
   font-weight: 500;
 }
 
@@ -39,7 +42,7 @@
   justify-content: flex-end;
   gap: 1rem;
   padding: 1rem 0;
-  background: var(--mat-sys-surface, #fffbfe);
+  background: var(--app-bg);
 }
 
 .confirmacao-card {
