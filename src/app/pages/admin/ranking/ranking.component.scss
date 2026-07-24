@@ -7,7 +7,8 @@
   --rank-silver: light-dark(#8b97a8, #b6c1d0);
   --rank-bronze: light-dark(#a96b3c, #d4915f);
 
-  max-width: 880px;
+  // Sem `max-width`: a tela ocupa toda a largura disponível. Em telas largas
+  // (≥ 1440px) o conteúdo passa a duas colunas (ver bloco responsivo abaixo).
 
   // O subtítulo carrega uma margem inferior pensada para telas sem toolbar;
   // aqui ele divide a linha com o contador e precisa ficar colado ao título.
@@ -336,6 +337,54 @@
     }
   }
 
+  /* -------------------------------------------------------------------------
+     Responsivo
+
+     Sem `max-width`, o conteúdo acompanha a largura da tela. Em telas largas
+     (≥ 1440px) o pódio e a classificação ficam lado a lado; conforme a tela
+     encolhe, ajustamos o conteúdo interno para nada estourar ou encostar nas
+     bordas (o `.content-wrapper` já reduz o padding externo em ≤768px).
+     ------------------------------------------------------------------------- */
+
+  // Telas largas (≥1440px): pódio à esquerda e classificação à direita, para
+  // aproveitar a largura em vez de esticar as linhas por toda a tela.
+  @media (min-width: 1440px) {
+    .ranking__content {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .podium {
+      // Largura contida à esquerda; a classificação ocupa o restante.
+      flex: 0 0 clamp(380px, 32%, 460px);
+      margin-bottom: 0;
+    }
+
+    .ranking__list {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+  }
+
+  // Tablets e telas médias: o pódio ainda cabe em três colunas, então basta
+  // afinar os espaçamentos internos dos cards.
+  @media (max-width: 768px) {
+    .podium {
+      padding: 2rem 1rem 0;
+    }
+
+    .ranking__list-header {
+      padding: 0.875rem 1rem;
+    }
+
+    .ranking__row {
+      padding: 0.625rem 1rem;
+    }
+  }
+
+  // Celulares: encolhe os avatares do pódio e reduz o texto para os três
+  // nomes continuarem legíveis lado a lado.
   @media (max-width: 600px) {
     .podium {
       gap: 0.5rem;
@@ -358,9 +407,43 @@
       font-size: 0.8125rem;
     }
 
+    .podium__points {
+      font-size: 0.75rem;
+    }
+
     .ranking__row {
       padding: 0.625rem 0.875rem;
       gap: 0.5rem;
+    }
+  }
+
+  // Celulares estreitos: o texto auxiliar do cabeçalho compete com o título
+  // por espaço e as “pílulas” de posição/pontos apertam a linha, então damos
+  // um último ajuste para nada quebrar em duas linhas ou transbordar.
+  @media (max-width: 400px) {
+    .podium__trophy {
+      top: -1.25rem;
+    }
+
+    // Some para o título "Classificação completa" não quebrar em duas linhas.
+    .ranking__list-hint {
+      display: none;
+    }
+
+    .ranking__row {
+      grid-template-columns: 28px 28px minmax(0, 1fr) auto;
+      gap: 0.4rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .ranking__place,
+    .ranking__avatar {
+      width: 28px;
+      height: 28px;
+    }
+
+    .ranking__points {
+      padding: 0.2rem 0.5rem;
     }
   }
 }

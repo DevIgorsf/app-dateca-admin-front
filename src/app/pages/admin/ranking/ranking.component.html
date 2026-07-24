@@ -25,49 +25,51 @@
       <span>O ranking aparece assim que as primeiras respostas forem registradas.</span>
     </div>
   } @else {
-    @if (podium.length >= 2) {
-      <section class="podium app-surface" aria-label="Primeiros colocados">
-        @for (row of podium; track row.position) {
-          <article class="podium__place" [class]="'podium__place--' + row.position">
-            <div class="podium__avatar" [attr.data-accent]="row.accent">
-              {{ row.initials }}
-              @if (row.position === 1) {
-                <i class="bi bi-trophy-fill podium__trophy" aria-hidden="true"></i>
-              }
-            </div>
-            <p class="podium__name" [title]="row.name">{{ row.name }}</p>
-            <p class="podium__points">{{ row.points }} pts</p>
-            <div class="podium__step">
-              <span class="podium__step-number">{{ row.position }}º</span>
-            </div>
-          </article>
-        }
+    <div class="ranking__content">
+      @if (podium.length >= 2) {
+        <section class="podium app-surface" aria-label="Primeiros colocados">
+          @for (row of podium; track row.position) {
+            <article class="podium__place" [class]="'podium__place--' + row.position">
+              <div class="podium__avatar" [attr.data-accent]="row.accent">
+                {{ row.initials }}
+                @if (row.position === 1) {
+                  <i class="bi bi-trophy-fill podium__trophy" aria-hidden="true"></i>
+                }
+              </div>
+              <p class="podium__name" [title]="row.name">{{ row.name }}</p>
+              <p class="podium__points">{{ row.points }} pts</p>
+              <div class="podium__step">
+                <span class="podium__step-number">{{ row.position }}º</span>
+              </div>
+            </article>
+          }
+        </section>
+      }
+
+      <section class="ranking__list app-surface">
+        <header class="ranking__list-header">
+          <h2 class="ranking__list-title">Classificação completa</h2>
+          <span class="ranking__list-hint">Pontuação acumulada</span>
+        </header>
+
+        <ol class="ranking__rows">
+          @for (row of rows; track row.position) {
+            <li class="ranking__row" [class.ranking__row--top]="row.position <= 3">
+              <span class="ranking__place" [attr.data-place]="row.position <= 3 ? row.position : null">
+                @if (row.position <= 3) {
+                  <i class="bi bi-award-fill" aria-hidden="true"></i>
+                  <span class="visually-hidden">{{ row.position }}º lugar</span>
+                } @else {
+                  {{ row.position }}
+                }
+              </span>
+              <span class="ranking__avatar" [attr.data-accent]="row.accent" aria-hidden="true">{{ row.initials }}</span>
+              <span class="ranking__name" [title]="row.name">{{ row.name }}</span>
+              <span class="ranking__points">{{ row.points }}<small>pts</small></span>
+            </li>
+          }
+        </ol>
       </section>
-    }
-
-    <section class="ranking__list app-surface">
-      <header class="ranking__list-header">
-        <h2 class="ranking__list-title">Classificação completa</h2>
-        <span class="ranking__list-hint">Pontuação acumulada</span>
-      </header>
-
-      <ol class="ranking__rows">
-        @for (row of rows; track row.position) {
-          <li class="ranking__row" [class.ranking__row--top]="row.position <= 3">
-            <span class="ranking__place" [attr.data-place]="row.position <= 3 ? row.position : null">
-              @if (row.position <= 3) {
-                <i class="bi bi-award-fill" aria-hidden="true"></i>
-                <span class="visually-hidden">{{ row.position }}º lugar</span>
-              } @else {
-                {{ row.position }}
-              }
-            </span>
-            <span class="ranking__avatar" [attr.data-accent]="row.accent" aria-hidden="true">{{ row.initials }}</span>
-            <span class="ranking__name" [title]="row.name">{{ row.name }}</span>
-            <span class="ranking__points">{{ row.points }}<small>pts</small></span>
-          </li>
-        }
-      </ol>
-    </section>
+    </div>
   }
 </div>
