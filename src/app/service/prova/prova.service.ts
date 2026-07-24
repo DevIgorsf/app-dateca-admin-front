@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ProvaAdminDetalhe, ProvaAdminResumo } from 'src/app/interfaces/prova';
+import { ProvaAdminDetalhe, ProvaAdminResumo, ProvaRankingItem } from 'src/app/interfaces/prova';
 import { environment } from 'src/environments/environment';
 import { isServicoIndisponivel } from 'src/app/service/http-error.util';
 
@@ -36,5 +36,10 @@ export class ProvaService {
 
   getDetalhe(id: string): Observable<ProvaAdminDetalhe> {
     return this.http.get<ProvaAdminDetalhe>(`${API}/prova/admin/${id}`);
+  }
+
+  /** Ranking da prova ordenado pelo total de questões respondidas corretamente. */
+  getRanking(id: string): Observable<ProvaRankingItem[]> {
+    return this.http.get<ProvaRankingItem[]>(`${API}/prova/admin/${id}/ranking`);
   }
 }

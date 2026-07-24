@@ -32,6 +32,16 @@ export interface ProvaQuestaoAdmin {
   ordem: number;
 }
 
+/** Itens de GET /prova/admin/:id/ranking (ordenado por acertos) */
+export interface ProvaRankingItem {
+  posicao: number;
+  studentId: string;
+  nomeAluno: string;
+  pontuacao: number;
+  acertos: number;
+  respondidoEm: string;
+}
+
 /** Retorno de GET /prova/admin/:id */
 export interface ProvaAdminDetalhe {
   id: string;

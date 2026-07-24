@@ -76,6 +76,44 @@
       </div>
     }
 
+    <section class="prova-ranking">
+      <div class="prova-ranking__cabecalho">
+        <h2 class="prova-detalhe__secao-titulo">Ranking por acertos</h2>
+        @if (ranking().length) {
+          <span class="prova-ranking__contagem">
+            <i class="bi bi-people-fill" aria-hidden="true"></i>
+            {{ ranking().length }} {{ ranking().length === 1 ? 'participante' : 'participantes' }}
+          </span>
+        }
+      </div>
+
+      @if (ranking().length === 0) {
+        <p class="prova-detalhe__vazio">Nenhum aluno respondeu esta prova ainda.</p>
+      } @else {
+        <div class="app-surface prova-ranking__lista">
+          <div class="prova-ranking__lista-cabecalho">
+            <span class="prova-ranking__col-aluno">Aluno</span>
+            <span class="prova-ranking__col-acertos">Acertos</span>
+          </div>
+
+          <ol class="prova-ranking__linhas">
+            @for (item of ranking(); track item.studentId) {
+              <li class="prova-ranking__linha" [class.prova-ranking__linha--top]="item.posicao <= 3">
+                <span class="prova-ranking__posicao" [attr.data-medal]="medalha(item.posicao)">
+                  {{ item.posicao }}
+                </span>
+                <span class="prova-ranking__avatar" aria-hidden="true">{{ iniciais(item.nomeAluno) }}</span>
+                <span class="prova-ranking__nome" [title]="item.nomeAluno">{{ item.nomeAluno }}</span>
+                <span class="prova-ranking__acertos">
+                  {{ item.acertos }}<small>/ {{ prova.questoes.length }}</small>
+                </span>
+              </li>
+            }
+          </ol>
+        </div>
+      }
+    </section>
+
     <h2 class="prova-detalhe__secao-titulo">Questões ({{ prova.questoes.length }})</h2>
 
     @if (prova.questoes.length === 0) {
