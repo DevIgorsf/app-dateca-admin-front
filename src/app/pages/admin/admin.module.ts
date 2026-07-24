@@ -3,6 +3,7 @@ import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfessorsComponent } from './professors/professors.component';
+import { StudentsComponent } from './students/students.component';
 import { AdminComponent } from './admin.component';
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 import { SidebarComponent } from 'src/app/shared/sidebar/sidebar.component';
@@ -38,6 +39,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
   declarations: [
     DashboardComponent,
     ProfessorsComponent,
+    StudentsComponent,
     CreateProfessorComponent,
     CourseComponent,
     NavbarComponent,

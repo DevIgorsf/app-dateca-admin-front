@@ -23,6 +23,16 @@
         </span>
       </a>
     </li>
+    <li class="sidebar-item sidebar-item--cyan" [ngClass]="{ 'active': students.isActive }">
+      <a class="sidebar-link" routerLink="/admin/aluno" routerLinkActive #students="routerLinkActive">
+        <span class="sidebar-item__icon">
+          <i class="bi bi-people-fill"></i>
+        </span>
+        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
+          Alunos
+        </span>
+      </a>
+    </li>
     <li class="sidebar-item sidebar-item--blue" [ngClass]="{ 'active': course.isActive }">
       <a class="sidebar-link" routerLink="/admin/materia" routerLinkActive #course="routerLinkActive">
         <span class="sidebar-item__icon">
